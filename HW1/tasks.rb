@@ -1,5 +1,5 @@
 arr = [1, 2 ,3, 4, 5]
-arr_with_negative = [9, -1, 0, -3, 8]
+arr_with_negative = [9, -1, 0, -3, 8, 5]
 
 p "Дан целочисленный массив. Необходимо вывести вначале его элементы с четными индексами, а затем - с нечетными."
 p "[1, 2, 3, 4 ,5]"
@@ -103,3 +103,47 @@ p "R = 12.5"
 p "arr = [19.9, 6.8, 15.3, 10.5]"
 diff = arr.map{|element| (R - element).abs}
 p "Наименьшая разница: #{diff.max}. Элемент массива, соответствующий этой разнице: #{arr[diff.index(diff.max)]}"
+p "--------------------------------------------------------------------------------------------------------------------"
+p "Дан целочисленный массив. Преобразовать его, вставив перед каждым положительным элементом нулевой элемент."
+p "[9, -1, 0, -3, 8]"
+arr_with_negative_modify = []
+arr_with_negative.each_with_index do |value, index|
+  if value > 0
+    arr_with_negative_modify  << arr_with_negative[0]
+  end
+  arr_with_negative_modify  << arr_with_negative[index]
+end
+p arr_with_negative_modify
+p "--------------------------------------------------------------------------------------------------------------------"
+p "Дан целочисленный массив. Преобразовать его, вставив перед каждым отрицательным элементом нулевой элемент."
+p "[9, -1, 0, -3, 8]"
+arr_with_negative_modify = []
+arr_with_negative.each_with_index do |value, index|
+  if value < 0
+    arr_with_negative_modify  << arr_with_negative[0]
+  end
+  arr_with_negative_modify  << arr_with_negative[index]
+end
+p arr_with_negative_modify
+p "--------------------------------------------------------------------------------------------------------------------"
+p "Дан целочисленный массив. Преобразовать его, вставив после каждого положительного элемента нулевой элемент."
+p "[9, -1, 0, -3, 8]"
+arr_with_negative_modify = []
+arr_with_negative.each_with_index do |value, index|
+  arr_with_negative_modify  << arr_with_negative[index]
+  if value > 0
+    arr_with_negative_modify  <<  arr_with_negative[0]
+  end
+end
+p arr_with_negative_modify
+p "--------------------------------------------------------------------------------------------------------------------"
+p "Дан целочисленный массив. Преобразовать его, вставив после каждого отрицательного элемента нулевой элемент."
+p "[9, -1, 0, -3, 8]"
+arr_with_negative_modify = []
+arr_with_negative.each_with_index do |value, index|
+  arr_with_negative_modify  << arr_with_negative[index]
+  if value < 0
+    arr_with_negative_modify  <<  arr_with_negative[0]
+  end
+end
+p arr_with_negative_modify
