@@ -441,5 +441,66 @@ p separator
 
 #63
 get_task
+# p rand_arr
+count_consecutive = 1
+p rand_arr_consecutive = [1, 5, -5, -5, -5, 7, 7, 7, 7, -5, 2, 0]
+rand_arr_consecutive.each_with_index do |val, el|
+  if rand_arr_consecutive.min == val
+    if rand_arr_consecutive[el] == rand_arr_consecutive[el+1]
+      count_consecutive += 1
+    end
+  end
+end
+p count_consecutive
+p separator
+
+#64
+get_task
+# p rand_arr
+count_consecutive = 1
+p rand_arr_consecutive = [1, 5, -5, -5, -5, 7, 7, 7, 7, -5, 2, 0]
+rand_arr_consecutive.each_with_index do |val, el|
+  if rand_arr_consecutive.max == val
+    if rand_arr_consecutive[el] == rand_arr_consecutive[el+1]
+      count_consecutive += 1
+    end
+  end
+end
+p count_consecutive
+p separator
+
+#65
+get_task
 p rand_arr
+rand_arr.select { |x| p x if x.even? } + rand_arr.select { |x| p x if x.odd? }
+p separator
+
+#66
+get_task
+p rand_arr
+rand_arr.select { |x| p x if x.odd? } + rand_arr.select { |x| p x if x.even? }
+p separator
+
+#67
+get_task
+p rand_arr
+#arr_check = [1,8,3,6,1,2]
+arr_alternate = (1...rand_arr.size-1).all? do |x|
+  left_el = rand_arr[x-1]
+  right_el  = rand_arr[x+1]
+  (rand_arr[x].odd? && left_el.even? && right_el.even?) || (rand_arr[x].even? && left_el.odd? && right_el.odd?)
+end
+p arr_alternate
+p separator
+
+#68
+get_task
+p rand_arr
+#arr_check = [1,-8,3,-6,1,-2]
+arr_alternate = (1...rand_arr.size-1).all? do |x|
+  left_el = rand_arr[x-1]
+  right_el  = rand_arr[x+1]
+  (rand_arr[x] > 0 && left_el < 0 && right_el < 0) || (rand_arr[x] < 0 && left_el > 0 && right_el > 0)
+end
+p arr_alternate
 p separator
