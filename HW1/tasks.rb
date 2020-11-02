@@ -504,3 +504,61 @@ arr_alternate = (1...rand_arr.size-1).all? do |x|
 end
 p arr_alternate
 p separator
+
+#69
+get_task
+# p rand_arr_float
+# p rand_float
+
+p separator
+
+#70
+get_task
+# p rand_arr_float
+# p rand_float
+
+p separator
+
+#71
+get_task
+p rand_arr
+p rand_arr.select{ |e| rand_arr.count(e) > 1 }.uniq
+p separator
+
+#72
+get_task
+p rand_arr
+p rand_arr.uniq
+p separator
+
+#73
+get_task
+p rand_arr
+p rand_arr.reject{ |e| rand_arr.count(e) == 2 }
+p separator
+
+#74
+get_task
+p rand_arr
+p rand_arr.reject{ |e| rand_arr.count(e) == 3 }
+p separator
+
+#75
+get_task
+p rand_arr
+sum = 0
+rand_arr.each { |e| sum = e.abs + sum }
+p sum / rand_arr.size
+p separator
+
+#76
+get_task
+p rand_arr
+sum = 0
+rand_arr.each { |e| sum = e*e + sum }
+p sum / rand_arr.size
+p separator
+
+#77
+get_task
+p separator
