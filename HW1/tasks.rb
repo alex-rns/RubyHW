@@ -5,14 +5,17 @@ rand_arr = Array.new(12) { rand(-5..15) }
 rand_arr_float = Array.new(6) { rand(0..10.0).ceil(3) }
 #Define random float
 rand_float = rand(0..10.0).ceil(3)
+# Define random interval
+interval = rand(1...5)..rand(5..10)
 #-----------------------------------------------------------------#
+separator = "--------------------------------------------------------------------------------------------------------------------"
 
 # Function of outputting tasks from file
-@task_count = 1
+@task_count = 0
 def get_task
   if File.exists?("ruby_tasks")
     task_array = IO.readlines("ruby_tasks")
-    p @task_count.to_s + ". " + task_array[@task_count].strip
+    p (@task_count+1).to_s + ". " + task_array[@task_count].strip
     @task_count += 1
   else
     p "Not found file 'ruby_tasks'"
@@ -24,126 +27,150 @@ end
 get_task
 p rand_arr
 rand_arr.each_with_index{ |value, index| p value if index.even? } + rand_arr.each_with_index{ |value, index| p value if index.odd? }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #2
 get_task
 p rand_arr
 rand_arr.each_with_index{ |value, index| p value if index.odd? } + rand_arr.each_with_index{ |value, index| p value if index.even? }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #3
 get_task
 p rand_arr
 p rand_arr.index{|element| element if rand_arr[0] < element && element < rand_arr[-1]} || []
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #4
 get_task
 p rand_arr
 p rand_arr.rindex{|element| element if rand_arr[0] < element && element < rand_arr[-1]} || []
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #5
 get_task
 p rand_arr
 p rand_arr.map { |e| e != rand_arr[0] && e != rand_arr[-1] && e.even? ? e + rand_arr[0]: e}
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #6
 get_task
 p rand_arr
 p rand_arr.map { |e| e != rand_arr[0] && e != rand_arr[-1] && e.even? ? e + rand_arr[-1]: e}
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #7
 get_task
 p rand_arr
 p rand_arr.map { |e| e != rand_arr[0] && e != rand_arr[-1] && e.odd? ? e + rand_arr[-1]: e}
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #8
 get_task
 p rand_arr
 p rand_arr.map { |e| e != rand_arr[0] && e != rand_arr[-1] && e.odd? ? e + rand_arr[0]: e}
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #9
 get_task
 p rand_arr
 p rand_arr.map {|e| e > 0 ? rand_arr.min : e }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #10
 get_task
 p rand_arr
 p rand_arr.map {|e| e > 0 ? rand_arr.max : e }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #11
 get_task
 p rand_arr
 p rand_arr.map {|e| e < 0 ? rand_arr.min : e }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #12
 get_task
 p rand_arr
 p rand_arr.map {|e| e < 0 ? rand_arr.max : e }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #13
 get_task
 p rand_arr
 p rand_arr.rotate
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #14
 get_task
 p rand_arr
 p rand_arr.rotate(-1)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #15
 get_task
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #16
 get_task
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #17
 get_task
 p rand_arr
 count_max = 0
 rand_arr.each_cons(3) {|a, b, c| count_max +=1 if a < b && b > c }
 p count_max
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #18
 get_task
 p rand_arr
 count_min = 0
 rand_arr.each_cons(3) {|a, b, c| count_min +=1 if a > b && b < c }
 p count_min
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #19
 get_task
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #20
 get_task
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #21
 get_task
 p rand_arr
 count_mono_up = 0
 rand_arr.each_cons(2) { |i,j| count_mono_up +=1 if i < j }
 p count_mono_up
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #22
 get_task
 p rand_arr
 count_mono_down = 0
 rand_arr.each_cons(2) { |i,j| count_mono_down +=1 if i > j }
 p count_mono_down
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #23
 get_task
 p "R = #{rand_float}"
 p rand_arr_float
 diff = rand_arr_float.map{|element| (rand_float - element).abs}
 p "Наименьшая разница: #{diff.min}. Элемент массива, соответствующий этой разнице: #{rand_arr_float[diff.index(diff.min)]}"
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #24
 get_task
 p "R = #{rand_float}"
 p rand_arr_float
 diff = rand_arr_float.map{|element| (rand_float - element).abs}
 p "Наименьшая разница: #{diff.max}. Элемент массива, соответствующий этой разнице: #{rand_arr_float[diff.index(diff.max)]}"
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #25
 get_task
 p rand_arr
@@ -155,7 +182,8 @@ rand_arr.each_with_index do |value, index|
   rand_arr_modify  << rand_arr[index]
 end
 p rand_arr_modify
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #26
 get_task
 p rand_arr
@@ -167,7 +195,8 @@ rand_arr.each_with_index do |value, index|
   rand_arr_modify  << rand_arr[index]
 end
 p rand_arr_modify
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #27
 get_task
 p rand_arr
@@ -179,7 +208,8 @@ rand_arr.each_with_index do |value, index|
   end
 end
 p rand_arr_modify
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #28
 get_task
 p rand_arr
@@ -191,98 +221,225 @@ rand_arr.each_with_index do |value, index|
   end
 end
 p rand_arr_modify
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #29
 get_task
 p rand_arr
 p rand_arr.sort
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #30
 get_task
 p rand_arr
 p rand_arr.sort {|x, y| y <=> x }
 p "или"
 p rand_arr.sort.reverse
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #31
 get_task
 p rand_arr
 p (0...rand_arr.size).sort_by{ |i| rand_arr[i] }.reverse
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #32
 get_task
 p rand_arr
 p (0...rand_arr.size).sort_by{ |i| rand_arr[i] }
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #33
 get_task
 p rand_arr
 p rand_arr.index(rand_arr.min)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #34
 get_task
 p rand_arr
 p rand_arr.index(rand_arr.max)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #35
 get_task
 p rand_arr
 p rand_arr.index(rand_arr.min)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #36
 get_task
 p rand_arr
 p rand_arr.index(rand_arr.max)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #37
 get_task
 p rand_arr
 p rand_arr.rindex(rand_arr.min)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #38
 get_task
 p rand_arr
 p rand_arr.rindex(rand_arr.max)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #39
 get_task
 p rand_arr
 p rand_arr.count(rand_arr.min)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #40
 get_task
 p rand_arr
 p rand_arr.count(rand_arr.max)
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #41
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i.even? }.min
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #42
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i.odd? }.min
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #43
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i.even? }.max
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #44
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i.odd? }.max
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #45
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i > 0 }.min
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #46
 get_task
 p rand_arr
 p rand_arr.select{ |i| i if i < 0 }.max
-p "--------------------------------------------------------------------------------------------------------------------"
+p separator
+
 #47
 get_task
+p rand_arr, interval
+p rand_arr.select { |index| interval === index }.min
+p separator
+
+#48
+get_task
+p rand_arr, interval
+p rand_arr.select { |index| interval === index }.max
+p separator
+
+#49
+get_task
+p rand_arr
+p rand_arr.index(rand_arr.min)
+p separator
+
+#50
+get_task
+p rand_arr
+p rand_arr.index(rand_arr.max)
+p separator
+
+#51
+get_task
+p rand_arr
+p rand_arr.size-1 - rand_arr.index(rand_arr.max)
+p separator
+
+#52
+get_task
+p rand_arr
+p rand_arr.size-1 - rand_arr.index(rand_arr.min)
+p separator
+
+#53
+get_task
+p rand_arr
+p rand_arr.rindex(rand_arr.max)
+p separator
+
+#54
+get_task
+p rand_arr
+p rand_arr.rindex(rand_arr.min)
+p separator
+
+#55
+get_task
+p rand_arr
+p rand_arr.size-1 - rand_arr.rindex(rand_arr.max)
+p separator
+
+#56
+get_task
+p rand_arr
+p rand_arr.size-1 - rand_arr.rindex(rand_arr.min)
+p separator
+
+#57
+get_task
+p rand_arr
+mini_idx = rand_arr.index(rand_arr.min)
+maxi_idx = rand_arr.index(rand_arr.max)
+p "Индекс первого минимального элемента: #{mini_idx}"
+p "Индекс первого максимаотного элемента: #{maxi_idx}"
+extrem_idx = mini_idx < maxi_idx ? mini_idx : maxi_idx
+p "Индекс первого из них (экстремального элемента): #{extrem_idx}"
+p separator
+
+#58
+get_task
+p rand_arr
+mini_idx = rand_arr.index(rand_arr.min)
+maxi_idx = rand_arr.index(rand_arr.max)
+p "Индекс первого минимального элемента: #{mini_idx}"
+p "Индекс первого максимаотного элемента: #{maxi_idx}"
+extrem_idx = mini_idx > maxi_idx ? mini_idx : maxi_idx
+p "Индекс последнего из них (экстремального элемента): #{extrem_idx}"
+p separator
+
+#59
+get_task
+p rand_arr
+p rand_arr.rindex(rand_arr.min) - 1
+p separator
+
+#60
+get_task
+p rand_arr
+p rand_arr.rindex(rand_arr.max) - 1
+p separator
+
+#61
+get_task
+p rand_arr
+p rand_arr.sort[-2..-1]
+p separator
+
+#62
+get_task
+p rand_arr
+p rand_arr.sort[0..1]
+p separator
+
+#63
+get_task
+p rand_arr
+p separator
