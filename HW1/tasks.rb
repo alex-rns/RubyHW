@@ -673,4 +673,12 @@ p separator
 
 #77
 get_task
+# Методом .digits превращаем цисла в массив и суммируем.
+p 5874.digits.sum # или .digits.inject(:+)
+p separator
+
+#78
+get_task
+# Аналогичное решение предыдущей задачи.
+p 5874.digits.inject(:*)
 p separator
