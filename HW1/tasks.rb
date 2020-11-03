@@ -7,6 +7,8 @@ rand_arr_float = Array.new(6) { rand(0..10.0).ceil(3) }
 rand_float = rand(0..10.0).ceil(3)
 # Define random interval
 interval = rand(1...5)..rand(5..10)
+# Define random integer
+rand_int = rand(1...15)
 #-----------------------------------------------------------------#
 separator = "--------------------------------------------------------------------------------------------------------------------"
 
@@ -681,4 +683,91 @@ p separator
 get_task
 # Аналогичное решение предыдущей задачи.
 p 5874.digits.inject(:*)
+p separator
+
+#79
+get_task
+p rand_arr
+# Используем .map, перебираем тернальным оператором. Нулевые элементы не изменятся.
+p rand_arr.map{|e| e < 0 ? e * e : e ** 3 }
+p separator
+
+#80
+get_task
+p interval
+# Перегоняем интервал в массив, за исключением первого и последнего элемента.
+p interval.to_a[1..-2].sort
+p interval.to_a[1..-2].size
+p separator
+
+#81
+get_task
+p interval
+# Перегоняем интервал в массив, за исключением первого и последнего элемента.
+p interval.to_a[1..-2].sort.reverse
+p interval.to_a[1..-2].size
+p separator
+
+#82
+get_task
+num_a = 13
+num_n = 18
+# В интервале от 1 до num_n суммируем все элементы с возрастающим умножением num_a.
+p (1..num_n).inject(1){ |sum, i| sum + num_a * i }
+p separator
+
+#83
+get_task
+num_a = 13
+num_n = 18
+# Аналогичное решение предыдущей задачи.
+p (1..num_n).inject(1 - num_a + num_a * 2 - num_a * 3){ |sum, i| sum + ((-1) ** i) * num_a * i }
+p separator
+
+#84
+get_task
+p rand_int
+# Аналогичное решение предыдущей задачи.
+p (1..rand_int).inject{ |s,i| s * i }
+p separator
+
+#85
+get_task
+p rand_int
+# Аналогичное решение предыдущей задачи.
+p (1..rand_int).inject{ |s,i| rand_int.odd? ? (s + 2) * i : (s * 2) * i }
+p separator
+
+#86
+get_task
+p rand_arr
+sum = 0
+# Перебираем массив. Суммируем элементы.
+rand_arr.each { |e| sum += e }
+# Делим сумму всех элементов на колличесво элементов в массиве.
+p sum / rand_arr.size
+p separator
+
+#87
+get_task
+p rand_arr
+p rand_arr.select{ |element| element.even?}
+p separator
+
+#88
+get_task
+p rand_arr
+p rand_arr.select{ |element| element.even?}.size
+p separator
+
+#89
+get_task
+p rand_arr
+p rand_arr.select{ |element| element.odd?}
+p separator
+
+#90
+get_task
+p rand_arr
+p rand_arr.select{ |element| element.odd?}.size
 p separator
