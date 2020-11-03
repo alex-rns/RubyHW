@@ -751,23 +751,107 @@ p separator
 #87
 get_task
 p rand_arr
+# Делаем выборку элементов массива.
 p rand_arr.select{ |element| element.even?}
 p separator
 
 #88
 get_task
 p rand_arr
+# Аналогичное решение предыдущей задачи.
 p rand_arr.select{ |element| element.even?}.size
 p separator
 
 #89
 get_task
 p rand_arr
+# Аналогичное решение предыдущей задачи.
 p rand_arr.select{ |element| element.odd?}
 p separator
 
 #90
 get_task
 p rand_arr
+# Аналогичное решение предыдущей задачи.
 p rand_arr.select{ |element| element.odd?}.size
+p separator
+
+#91
+get_task
+p rand_arr
+p rand_int
+# Проверяем массив методом .any?.
+p rand_arr.any?{ |element| element < rand_int }
+p separator
+
+#92
+get_task
+p rand_arr
+p rand_int
+# Аналогичное решение предыдущей задачи.
+p rand_arr.any?{ |element| element > rand_int }
+p separator
+
+#93
+get_task
+p rand_arr
+p rand_int
+# Проверяем массив методом .all?.
+p rand_arr.all?{ |element| element < rand_int }
+p separator
+
+#94
+get_task
+p rand_arr
+p rand_int
+# Аналогичное решение предыдущей задачи.
+p rand_arr.all?{ |element| element > rand_int }
+p separator
+
+#95
+get_task
+p rand_arr
+p rand_int
+# Перебираем массив на условие. Выводим колличество.
+p rand_arr.select{ |element| element < rand_int }.size
+p separator
+
+#96
+get_task
+p rand_arr
+p rand_int
+# Выводим индекс первого элемента, котроый больше заданного числа.
+p rand_arr.index{ |element| element > rand_int }
+p separator
+
+#97
+get_task
+p rand_arr
+p rand_int
+# Аналогичное решение предыдущей задачи.
+p rand_arr.rindex{ |element| element < rand_int }
+p separator
+
+#98
+get_task
+p rand_arr
+# Сравниваем элементы(кроме первого) по условию. Выводим индексы.
+p indexes_98 = (1...rand_arr.size).select{ |element| rand_arr[element] < rand_arr[element - 1] }
+p indexes_98.size
+p separator
+
+#99
+get_task
+p rand_arr
+# Аналогичное решение предыдущей задачи.
+p indexes_98 = (0...rand_arr.size-1).select{ |element| rand_arr[element] < rand_arr[element + 1] }
+p indexes_98.size
+p separator
+
+#100
+get_task
+p rand_arr
+# Аналогичное решение предыдущей задачи.
+p indexes_98 = (0...rand_arr.size-1).select{ |element| rand_arr[element] > rand_arr[element + 1] }
+p indexes_98.size
 p separator
