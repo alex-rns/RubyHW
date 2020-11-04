@@ -142,8 +142,12 @@ p separator
 get_task
 p rand_arr #= [2, 4, 8, 16, 32, 64]
 #Аналогичное решение предыдущей задачи.
-diff = rand_arr.each_cons(2).map { |el| el[1] / el[0] }.uniq
-p diff.size > 1 ? nil : diff[0]
+if rand_arr.include?(0)
+  p " Массив содержит элемент со значением '0'. Проверка невозможна."
+else
+  diff = rand_arr.each_cons(2).map { |el| el[1] / el[0] }.uniq
+  p diff.size > 1 ? nil : diff[0]
+end
 p separator
 
 #17
@@ -624,16 +628,24 @@ p separator
 
 #69
 get_task
-# p rand_arr_float
-# p rand_float
-
+p rand_arr_float
+p rand_float
+# Нужно найти все комбинации элементов из массива и сравнить каждую пару с числом R.
+# Для начала используем метод .combination, чтобы получить массив всех возможных комбинаций(по два) исходного массиваю.
+p all_combitation = rand_arr_float.combination(2).to_a
+# Производим выборку из всех комбинаций массива методом .min_by.
+# Находим минимальную разницу между суммой массивов и числом R.
+# Сумма чисел этого массива будет наиболее близка к R.
+p all_combitation.min_by{|x, y| (x + y - rand_float).abs}
 p separator
 
 #70
 get_task
-# p rand_arr_float
-# p rand_float
-
+# Аналогичное решение предыдущей задачи.
+p rand_arr_float
+p rand_float
+p all_combitation = rand_arr_float.combination(2).to_a
+p all_combitation.max_by{|x, y| (x + y - rand_float).abs}
 p separator
 
 #71
