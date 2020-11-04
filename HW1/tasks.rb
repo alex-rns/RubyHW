@@ -28,16 +28,15 @@ end
 #1
 get_task
 p rand_arr
-#Сортируем массив методами .each_with_index. Если индекс чётный(index.even?) - выводим значение этого индекса.
-#Таким же образом сортируем массив на нечётные индексы.
-rand_arr.each_with_index{ |value, index| p value if index.even? } + rand_arr.each_with_index{ |value, index| p value if index.odd? }
+# Исползуем метод .partition, который выводит сначала массив элементов, результат обработки блока для которых true,
+# а потом массив всех остальных. После переводим массивы в строку с разделителем.
+p rand_arr.partition.with_index { |v, i| i.even? } * ", "
 p separator
-
 #2
 get_task
 p rand_arr
 #Аналогичное решение предыдущей задачи.
-rand_arr.each_with_index{ |value, index| p value if index.odd? } + rand_arr.each_with_index{ |value, index| p value if index.even? }
+p rand_arr.partition.with_index { |v, i| i.odd? } * ", "
 p separator
 
 #3
