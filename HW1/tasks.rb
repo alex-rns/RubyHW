@@ -3,7 +3,7 @@
 rand_arr = Array.new(12) { rand(-5..15) }
 # Define random array with float elements
 rand_arr_float = Array.new(6) { rand(0..10.0).ceil(3) }
-#Define random float
+# Define random float
 rand_float = rand(0..10.0).ceil(3)
 # Define random interval
 interval = rand(1...5)..rand(5..10)
@@ -409,14 +409,13 @@ p separator
 get_task
 p rand_arr, interval
 # Методом .select выбираем все значения массива, который есть в пределах интервала. Выводим минимальный элемент.
-p rand_arr.select { |index| interval === index }.min
+p rand_arr.select { |index| interval.include?(index) }.min
 p separator
-
 #48
 get_task
 p rand_arr, interval
 # Аналогичное решение предыдущей задачи.
-p rand_arr.select { |index| interval === index }.max
+p rand_arr.select { |index| interval.include?(index) }.max
 p separator
 
 #49
@@ -579,14 +578,14 @@ p separator
 get_task
 p rand_arr
 # Перебираем массив на чётные, потом на нечётные.
-p rand_arr.select { |x| x.even? } * ", " + ", " + rand_arr.select { |x| x.odd? } * ", "
+p rand_arr.select(&:even?) * ", " + ", " + rand_arr.select(&:odd?) * ", "
 p separator
 
 #66
 get_task
 p rand_arr
 # Аналогичное решение предыдущей задачи.
-p rand_arr.select { |x| x.odd? } * ", " + ", " + rand_arr.select { |x| x.even? } * ", "
+p rand_arr.select(&:odd?) * ", " + ", " + rand_arr.select(&:even?) * ", "
 p separator
 
 #67
@@ -703,7 +702,7 @@ p separator
 get_task
 p rand_arr
 # Используем .map, перебираем тернальным оператором. Нулевые элементы не изменятся.
-p rand_arr.map{ |e| e < 0 ? e * e : e ** 3 }
+p rand_arr.map{ |e| e < 0 ? e * e : e**3 }
 p separator
 
 #80
@@ -735,7 +734,7 @@ get_task
 num_a = 13
 num_n = 18
 # Аналогичное решение предыдущей задачи.
-p (1..num_n).inject(1 - num_a + num_a * 2 - num_a * 3){ |sum, i| sum + ((-1) ** i) * num_a * i }
+p (1..num_n).inject(1 - num_a + num_a * 2 - num_a * 3){ |sum, i| sum + ((-1)**i) * num_a * i }
 p separator
 
 #84
@@ -766,28 +765,28 @@ p separator
 get_task
 p rand_arr
 # Делаем выборку элементов массива.
-p rand_arr.select{ |e| e.even? }
+p rand_arr.select(&:even?)
 p separator
 
 #88
 get_task
 p rand_arr
 # Аналогичное решение предыдущей задачи.
-p rand_arr.select{ |e| e.even? }.size
+p rand_arr.select(&:even?).size
 p separator
 
 #89
 get_task
 p rand_arr
 # Аналогичное решение предыдущей задачи.
-p rand_arr.select{ |e| e.odd? }
+p rand_arr.select(&:odd?)
 p separator
 
 #90
 get_task
 p rand_arr
 # Аналогичное решение предыдущей задачи.
-p rand_arr.select{ |e| e.odd? }.size
+p rand_arr.select(&:odd?).size
 p separator
 
 #91
