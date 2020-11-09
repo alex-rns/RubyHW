@@ -56,7 +56,7 @@ class Minion
     passed_time
   end
 
-  def sleep
+  def go_sleep
     if @wc >= 7 || @hunger >= 7
       puts 'Attention! Minion can not sleep. Something bothers him.'.colorize(:red)
       puts "#{@name}: BULAKA".colorize(:light_yellow)
@@ -111,16 +111,71 @@ class Minion
   end
 
   def play
-    puts 'Print number of game if you want to play:'
-    puts '1 - die, 2 - rock-scissor-paper'
+    puts 'Enter number of game if you want to play:'
+    puts '1 - Guess number, 2 - Slot machine, 3 - exit game list'
     game = gets.chomp.strip
     case game
     when '1'
-      puts '1'
+      puts "Game 'Guess number'"
+      puts 'The minion thought of a number from 1 to 100, guess the number.'
+      number = rand(1..100)
+      input = ''
+      until input == "stop"
+        puts "Input number or 'stop' to exit game:"
+        input = gets.chomp
+        if input.to_i > number
+          puts 'Your number is greater.'
+        elsif input.to_i  < number
+          puts 'Your number is less.'
+        else
+          puts "Right! Guess number - #{number}"
+          puts "#{@name}: TULALILOO TI AMO!".colorize(:light_yellow)
+          @mood += 4
+          break
+        end
+      end
+      passed_time
+
     when '2'
-      puts '2'
+      p "Game 'Slot machine'"
+      p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
+      win_variant = {
+        '700' => 100,
+        '710' => 200,
+        '720' => 300,
+        '730' => 400,
+        '740' => 500,
+        '750' => 600,
+        '760' => 700,
+        '770' => 800,
+        '777' => 10000,
+      }
+      money = 2
+      input = ''
+      until input == "stop"
+        puts "Press ENTER for game or 'stop' to exit game"
+        input = gets.chomp
+        random = rand(700..780).to_s
+        if win_variant[random]
+          puts "#{@name} win #{win_variant[random]} dollars."
+          puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+          @mood += 8
+          money += win_variant[random]
+        elsif money <= 0
+          puts "#{@name} lost all the money"
+          puts "#{@name}: UNDERWEAR…!".colorize(:light_yellow)
+          @mood -= 4
+          break
+        else
+          puts "Minion lost 50 cent."
+          money -= 0.5
+        end
+        puts "Combination: #{random}"
+        puts "Minion balance is #{money}", ""
+      end
+      passed_time
     else
-      puts 'exit'
+      puts 'Unknown command. Enter number of game.'
     end
   end
 
@@ -253,6 +308,21 @@ class Minion
     end
     @evolution = false
   end
+
+  def roll
+    1 + rand(6)
+  end
+  # def random_animation i
+  #   5.times do
+  #     i = rand(0..5)
+  #     print i
+  #     sleep 0.3
+  #     print "\b"
+  #   end
+  #   print i
+  #   print "  "
+  # end
+
 end
 
 # puts 'Welcome to the tamagotchi game! Your pet is a minion.'
@@ -274,7 +344,7 @@ until command == 'exit'
   when 'feed', '3'
     pet.feed
   when 'sleep', '4'
-    pet.sleep
+    pet.go_sleep
   when 'wc', '5'
     pet.go_wc
   when 'walk', '6'
