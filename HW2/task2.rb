@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'colorize'
+# String.color_samples
+
 # class Minion
 class Minion
   def initialize(name)
@@ -13,7 +16,7 @@ class Minion
     @study = 0
     @poo_poo = 0
     @evolution = false
-    p "Minion #{name} came to you!"
+    puts "Minion #{name} came to you!"
     print "
 ────────▄▀▀═════════════▀▀▄
 ───────█═══════════════════█
@@ -41,40 +44,41 @@ class Minion
 ─────────▐▓▓▓▓▓▓▌▐▓▓▓▓▓▓▌
 ──────────▐▓▓▓▓▌──▐▓▓▓▓▌
 ─────────▄████▀────▀████▄ ❤
-"
-    p "#{@name}: BELLO!"
+".colorize(:light_yellow)
+
+    puts "#{@name}: BELLO!".colorize(:light_yellow)
   end
 
   def feed
-    p "You give #{@name} his favorite food"
-    p @name + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s
-    @hunger = 0
+    puts "You give #{@name} his favorite food"
+    puts @name.colorize(:light_yellow) + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s.colorize(:light_yellow)
+    @hunger = -1
     passed_time
   end
 
   def sleep
     if @wc >= 7 || @hunger >= 7
-      p 'Minion can not sleep. Something bothers him.'
-      p "#{@name}: BULAKA"
+      puts 'Attention! Minion can not sleep. Something bothers him.'.colorize(:red)
+      puts "#{@name}: BULAKA".colorize(:light_yellow)
     else
-      p "You put #{@name} to bed."
-      p "#{@name}: MUAK MUAK MUAK!"
+      puts "You put #{@name} to bed."
+      puts "#{@name}: MUAK MUAK MUAK!".colorize(:light_yellow)
       @sleep = 0
-      2.times{passed_time}
+      2.times { passed_time }
     end
   end
 
   def go_wc
-    p 'Minion goes to the toilet'
-    p "#{@name}: PWEDE NA?"
+    puts 'Minion goes to the toilet'
+    puts "#{@name}: PWEDE NA?".colorize(:light_yellow)
     @wc = 0
     passed_time
   end
 
   def walk_check
     if @hunger >= 6
-      p 'Attention! The walk will take a long time. Recommended to feed minion before walk.'
-      p 'Input 1 for walk or 2 for feed minion.'
+      puts 'Attention! The walk will take a long time. Recommended to feed minion before walk.'.colorize(:red)
+      puts 'Input 1 for walk or 2 for feed minion.'
       walk_choise = gets.chomp.strip
       case walk_choise
       when "1"
@@ -82,7 +86,7 @@ class Minion
       when "2"
         feed
       else
-        p 'Unknown command. Please input 1 or 2.'
+        puts 'Unknown command. Please input 1 or 2.'.colorize(:red)
       end
     else
       walk
@@ -90,8 +94,8 @@ class Minion
   end
 
   def study
-    p 'You minion is learning Ruby'
-    p "#{@name}: WOW! BOBMA!"
+    puts 'You minion is learning Ruby'
+    puts "#{@name}: WOW! BOBMA!".colorize(:light_yellow)
     if @mood < 4
       @study += 1
     else
@@ -101,50 +105,50 @@ class Minion
   end
 
   def clean_up
-    p 'We cleaned up around'
+    puts 'We cleaned up around'
     @poo_poo = 0
     passed_time
   end
 
   def play
-    p 'Print number of game if you want to play:'
-    p '1 - die, 2 - rock-scissor-paper'
+    puts 'Print number of game if you want to play:'
+    puts '1 - die, 2 - rock-scissor-paper'
     game = gets.chomp.strip
     case game
     when '1'
-      p '1'
+      puts '1'
     when '2'
-      p '2'
+      puts '2'
     else
-      p 'exit'
+      puts 'exit'
     end
   end
 
   def status
-    p '----------------Your minion status-----------------'
-    p @name
-    p "Age: #{@age}"
-    p "Life: #{@life}"
-    p "Mood: #{@mood*5}%"
-    p "Hunger: #{@hunger*10}%"
-    p "Sleep: #{@sleep*5}%"
-    p "WC: #{@wc*10}%"
-    p "Study: level #{@study}"
-    p '---------------------------------------------------'
+    puts '----------------Your minion status-----------------'.colorize(:cyan)
+    puts @name.colorize(:light_yellow)
+    puts "Age: #{@age}".colorize(:cyan)
+    puts "Life: #{@life}".colorize(:cyan)
+    puts "Mood: #{@mood * 5}%".colorize(:cyan)
+    puts "Hunger: #{@hunger * 10}%".colorize(:cyan)
+    puts "Sleep: #{@sleep * 5}%".colorize(:cyan)
+    puts "WC: #{@wc * 10}%".colorize(:cyan)
+    puts "Study: level #{@study}".colorize(:cyan)
+    puts '---------------------------------------------------'.colorize(:cyan)
   end
 
   def help
-    p 'List of available commands:'
-    p '1 or help'
-    p '2 or status'
-    p '3 or feed'
-    p '4 or sleep'
-    p '5 or wc'
-    p '6 or walk'
-    p '7 or study'
-    p '8 or clean'
-    p '9 or play'
-    p '10 or exit'
+    puts 'List of available commands:'
+    puts '1 or help'
+    puts '2 or status'
+    puts '3 or feed'
+    puts '4 or sleep'
+    puts '5 or wc'
+    puts '6 or walk'
+    puts '7 or study'
+    puts '8 or clean'
+    puts '9 or play'
+    puts '10 or exit'
   end
 
   private
@@ -160,10 +164,10 @@ class Minion
     # evolution
     unless @evolution
       if @age >= 40 && @study >= 30
-        p 'WOWOWOWOWOWOWOWOW!!!!!!'
-        p "#{@name} evolve into a Super#{@name}!"
+        puts 'WOWOWOWOWOWOWOWOW!!!!!!'.colorize(:green)
+        puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
         @name = "Super#{@name}"
-        p "#{@name}: BEE DO BEE DO BEE DO!"
+        puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
         @mood = 50
         @life += 1
         @evolution = true
@@ -171,65 +175,65 @@ class Minion
     end
 
     # hunger
-    if @hunger >=8
-      p 'Attention! Feed your minion!'
-      p "#{@name}: ME WANT BANANA!"
+    if @hunger >= 8
+      puts 'Attention! Feed your minion!'.colorize(:red)
+      puts "#{@name}: ME WANT BANANA!".colorize(:light_yellow)
     end
     if @hunger >= 10
       die
-      p 'You did not feed your minion'
-      p "#{@name} lost one life, #{@life} left"
-      p "#{@name}: TATATA BALA TU!"
+      puts 'You did not feed your minion'.colorize(:red)
+      puts "#{@name} lost one life, #{@life} left".colorize(:red)
+      puts "#{@name}: TATATA BALA TU!".colorize(:light_yellow)
     end
 
     #sleep
     if @sleep >= 16
       @mood -= 1
-      p 'Attention! Minion wants to sleep!'
+      puts 'Attention! Minion wants to sleep!'.colorize(:red)
     end
     if @sleep >= 18
       @mood -= 3
-      p 'Attention! Minion wants to sleep! Mood gets worse.'
+      puts 'Attention! Minion wants to sleep! Mood gets worse.'.colorize(:red)
     end
 
     # wc
     if @wc >= 8
-      p 'Attention! Minion wants to go to the toilet!'
-      p "#{@name}: STUPA! PEE-PEE!"
+      puts 'Attention! Minion wants to go to the toilet!'.colorize(:red)
+      puts "#{@name}: STUPA! PEE-PEE!".colorize(:light_yellow)
     end
     if @wc >= 10
-      p 'Your minion went to the toilet in jeans'
-      p "#{@name}: OOOPS! BI-DO"
-      @poo_poo +=1
+      puts 'Your minion went to the toilet in jeans'.colorize(:red)
+      puts "#{@name}: OOOPS! BI-DO".colorize(:light_yellow)
+      @poo_poo += 1
       @wc = 0
     end
 
     # mood
     if @mood <= 3
-      p 'Minion is in no mood. Play with him or take for a walk.'
-      p "#{@name}: PAPOY.."
+      puts 'Attention! Minion is in no mood. Play with him or take for a walk.'.colorize(:red)
+      puts "#{@name}: PAPOY..".colorize(:light_yellow)
     end
 
     if @poo_poo > 3
-      p 'It is too dirty. Please clean around'
+      puts 'Attention! It is too dirty. Please clean around'.colorize(:red)
       @mood -= 1
     end
     if @poo_poo > 5
       die
-      p "#{@name} is sick and lost one life, #{@life} left"
+      puts "#{@name} is sick and lost one life, #{@life} left".colorize(:red)
     end
 
     # life
     if @life.zero?
-      p "Minion has no lives left. You lost #{@name}"
-      p "#{@name}: POOPAYE..."
+      puts "Minion has no lives left. You lost #{@name}".colorize(:red)
+      puts "#{@name}: POOPAYE...".colorize(:light_yellow)
       exit
     end
   end
 
   def walk
-    p "You go for a walk with #{@name}"
-    p "#{@name}: KAMPAI!"
+    puts "You go for a walk with #{@name}"
+    puts "#{@name}: KAMPAI!".colorize(:light_yellow)
     @wc = 0
     @mood += 5
     @hunger += 3
@@ -255,7 +259,7 @@ pet = Minion.new 'Stuard'
 
 command = ''
 until command == 'exit'
-  p '---------------------------------------------------'
+  puts '---------------------------------------------------'
   puts 'Please input command:'
   command = gets.chomp.strip
   case command
@@ -280,7 +284,7 @@ until command == 'exit'
   when 'exit', '10'
     exit
   else
-    p command + ' unknown command. To get list of commands type help'
+    puts command + ' unknown command. To get list of commands type help'
   end
 end
 
