@@ -16,7 +16,7 @@ class Minion
     @study = 0
     @poo_poo = 0
     @evolution = false
-    puts "Minion #{name} came to you!"
+
     print "
 ────────▄▀▀═════════════▀▀▄
 ───────█═══════════════════█
@@ -45,7 +45,7 @@ class Minion
 ──────────▐▓▓▓▓▌──▐▓▓▓▓▌
 ─────────▄████▀────▀████▄ ❤
 ".colorize(:light_yellow)
-
+    puts "Minion #{name} came to you!"
     puts "#{@name}: BELLO!".colorize(:light_yellow)
   end
 
@@ -255,7 +255,11 @@ class Minion
   end
 end
 
-pet = Minion.new 'Stuard'
+# puts 'Welcome to the tamagotchi game! Your pet is a minion.'
+# puts 'Please enter minion\'s name:'
+# input_name = gets.chomp.strip
+# pet = Minion.new(input_name)
+pet = Minion.new('Stuard')
 
 command = ''
 until command == 'exit'
