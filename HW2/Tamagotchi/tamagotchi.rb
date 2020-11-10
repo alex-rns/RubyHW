@@ -221,7 +221,6 @@ class Pet
         puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
         @name = "Super#{@name}"
         puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
-        @mood = 50
         @life += 1
         @evolution = true
       end
@@ -263,10 +262,11 @@ class Pet
 
     # mood
     if @mood <= 3
-      puts 'Attention! Minion is in no mood. Play with him or take for a walk.'.colorize(:red)
+      puts 'Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.'.colorize(:red)
       puts "#{@name}: PAPOY..".colorize(:light_yellow)
     end
 
+    # poo-poo
     if @poo_poo > 3
       puts 'Attention! It is too dirty. Please clean around'.colorize(:red)
       @mood -= 1
@@ -282,6 +282,10 @@ class Pet
       puts "#{@name}: POOPAYE...".colorize(:light_yellow)
       exit
     end
+
+    # parameter limit
+    @mood = 0 if @mood.negative?
+    @mood = 10 if @mood > 10
   end
 
   def walk
