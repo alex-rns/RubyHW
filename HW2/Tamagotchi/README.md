@@ -2,16 +2,16 @@
 
 By Oleksandr Bielodubrovskyi
 
-##Description:
+## Description:
 This project was created to practice object-oriented ruby.
 
-##Requirements 
+## Requirements 
 
 - Ruby 2.0
 - git (optional)
 - ruby gem colorize (optional)
 
-##Download
+## Download
 
 Clone this repository into your computer:
 ```sh
@@ -44,7 +44,7 @@ $ gem install colorize
 
 The aim is to look after your pet by feeding him and keeping him entertained.
 
-##Technologies Used
+## Technologies Used
 
 - ruby
 - gem colorize
