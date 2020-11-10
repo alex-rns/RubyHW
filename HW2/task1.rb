@@ -36,7 +36,7 @@ p(array.map { |e| e.to_f / 10 })
 p separator
 p 'получить новый массив, который бы содержал в себе те буквы английского алфавита, порядковый номер которых есть
  в нашем массиве'
-('a'..'z').each_with_index { |char, ind| p char if array.each.include?(ind) }
+('a'..'z').each_with_index { |char, ind| p char if array.each.include?(ind + 1) }
 p separator
 p 'поменять местами минимальный и максимальный элементы массива'
 index_min = array.index(array.min)

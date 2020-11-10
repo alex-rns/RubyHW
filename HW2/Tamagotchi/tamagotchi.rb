@@ -115,64 +115,9 @@ class Pet
     game = gets.chomp.strip
     case game
     when '1'
-      puts "Game 'Guess number'"
-      puts 'The minion thought of a number from 1 to 100, guess the number.'
-      number = rand(1..100)
-      input = ''
-      until input == 'stop'
-        puts "Input number or 'stop' to exit game:"
-        input = gets.chomp
-        if input.to_i > number
-          puts 'Your number is greater.'
-        elsif input.to_i < number
-          puts 'Your number is less.'
-        else
-          puts "Right! Guess number - #{number}"
-          puts "#{@name}: TULALILOO TI AMO!".colorize(:light_yellow)
-          @mood += 4
-          break
-        end
-      end
-      passed_time
-
+      game1
     when '2'
-      p "Game 'Slot machine'"
-      p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
-      win_variant = {
-        '700' => 100,
-        '710' => 200,
-        '720' => 300,
-        '730' => 400,
-        '740' => 500,
-        '750' => 600,
-        '760' => 700,
-        '770' => 800,
-        '777' => 10_000
-      }
-      money = 2
-      input = ''
-      until input == 'stop'
-        puts "Press ENTER for game or 'stop' to exit game"
-        input = gets.chomp
-        random = rand(700..780).to_s
-        if win_variant[random]
-          puts "#{@name} win #{win_variant[random]} dollars."
-          puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
-          @mood += 8
-          money += win_variant[random]
-        elsif money <= 0
-          puts "#{@name} lost all the money"
-          puts "#{@name}: UNDERWEAR…!".colorize(:light_yellow)
-          @mood -= 4
-          break
-        else
-          puts 'Minion lost 50 cent.'
-          money -= 0.5
-        end
-        puts "Combination: #{random}"
-        puts "Minion balance is #{money}", ''
-      end
-      passed_time
+      game2
     else
       puts 'Unknown command. Enter number of game.'
     end
@@ -307,6 +252,72 @@ class Pet
     @study = 0
     @name = @name.delete_prefix('Super') if @evolution
     @evolution = false
+  end
+
+  def game1
+    puts "Game 'Guess Number'"
+    puts 'The minion thought of a number from 1 to 100, guess the number.'
+    number = rand(1..100)
+    input = ''
+    until input == 'stop'
+      puts "Input number or 'stop' to exit game:"
+      input = gets.chomp
+      if input.to_i > number
+        puts 'Your number is greater.'
+      elsif input.to_i < number
+        puts 'Your number is less.'
+      else
+        puts "Right! Guess number - #{number}"
+        puts "#{@name}: TULALILOO TI AMO!".colorize(:light_yellow)
+        @mood += 4
+        break
+      end
+    end
+    passed_time
+  end
+
+  def game2
+    p "Game 'Slot Machine'"
+    p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
+    win_variant = {
+      '700' => 100,
+      '710' => 200,
+      '720' => 300,
+      '730' => 400,
+      '740' => 500,
+      '750' => 600,
+      '760' => 700,
+      '770' => 800,
+      '777' => 10_000
+    }
+    money = 2
+    input = ''
+    until input == 'stop'
+      puts "Press ENTER for game or 'stop' to exit game"
+      input = gets.chomp
+      random = rand(700..780).to_s
+      if win_variant[random]
+        puts "#{@name} win #{win_variant[random]} dollars."
+        puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+        @mood += 8
+        money += win_variant[random]
+      elsif money <= 0
+        puts "#{@name} lost all the money"
+        puts "#{@name}: UNDERWEAR…!".colorize(:light_yellow)
+        @mood -= 4
+        break
+      else
+        puts 'Minion lost 50 cent.'
+        money -= 0.5
+      end
+      puts "Combination: #{random}"
+      puts "Minion balance is #{money}", ''
+    end
+    passed_time
+  end
+
+  def game3
+    p " Game 'Roll the Dice'"
   end
 
   def roll
