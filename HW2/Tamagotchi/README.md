@@ -44,6 +44,70 @@ $ gem install colorize
 
 The aim is to look after your pet by feeding him and keeping him entertained.
 
+### Minion's dictionary
+| Minion's language | English |
+| ------ | ------ |
+| Hana | One |
+| Dul | Two |
+| Sae | Three |
+| Bello | Hello |
+| Poopaye | Googbye |
+| Bi-do | Sorry |
+| Pwede na? | Let's begin? |
+| Tatata bala tu | Hate you |
+| Underwear… | Swear |
+| Me want banana | I am hungry |
+| Luk at tu | Look at you |
+| Para tu | For you |
+| Tank yu | Thank you |
+| Sa la ka! | How dare you? |
+| Bulaka | What's happening? |
+| Tulaliloo ti amo | I love you |
+| Ba-na-na | Banana |
+| Potato | Potato |
+| Babbles | Apples |
+| Gelato | Ice cream |
+| Buttom | Down |
+| Kampai | Hooray |
+| BEE DO BEE DO BEE DO | Fire |
+| Muak Muak Muak | Kiss |
+| Stupa | Stop |
+| Bomba | Bomb |
+| Papoy | Toy |
+| Bananonina | Ugly |
+| Po ka | What |
+
+* До свиданья — Poopaye
+> 
+Спасибо -Tank yu
+Прости — Bi-do
+Ну что, начнём? — Pwede na?
+Для тебя — Para tu
+Как ты смеешь? -Sa la ka!
+Что происходит? — Bulaka
+Ненавижу тебя — Tatata bala tu
+Клянусь… — Underwear…
+Я голоден — Me want banana
+Посмотри на себя — Luk at tu
+Мы любим тебя — Tulaliloo ti amo
+Банан — Ba-na-na
+Картошка — Potato
+Яблоки — Babbles/Papples
+Мороженое — Gelato
+Низ — Buttom
+Зад — Butt
+Стул — Chasy
+Ура — Kampai
+Огонь — BEE DO BEE DO BEE DO
+Поцелуй, поцелуй — Muak Muak Muak
+Свадьба — La boda
+Стоп – Stupa
+Бомба — Bomba
+Игрушка — Papoy
+Уродливый — Bananonina
+Что — Po ka
+
+
 ## Technologies Used
 
 - ruby

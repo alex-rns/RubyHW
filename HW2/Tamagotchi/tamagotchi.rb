@@ -111,13 +111,17 @@ class Pet
 
   def play
     puts 'Enter number of game if you want to play:'
-    puts '1 - Guess number, 2 - Slot machine, 3 - exit game list'
+    puts '1 - Guess Number, 2 - Slot Machine, 3 - Roll The Dice, 4 - exit game list'
     game = gets.chomp.strip
     case game
     when '1'
       game1
     when '2'
       game2
+    when '3'
+      game3
+    when '4'
+      status
     else
       puts 'Unknown command. Enter number of game.'
     end
@@ -231,6 +235,7 @@ class Pet
     # parameter limit
     @mood = 0 if @mood.negative?
     @mood = 10 if @mood > 10
+    @sleep = 10 if @sleep > 10
   end
 
   def walk
@@ -280,17 +285,17 @@ class Pet
     p "Game 'Slot Machine'"
     p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
     win_variant = {
-      '700' => 100,
-      '710' => 200,
-      '720' => 300,
-      '730' => 400,
-      '740' => 500,
-      '750' => 600,
-      '760' => 700,
-      '770' => 800,
+      '700' => 10,
+      '710' => 20,
+      '720' => 30,
+      '730' => 40,
+      '740' => 50,
+      '750' => 60,
+      '760' => 70,
+      '770' => 80,
       '777' => 10_000
     }
-    money = 2
+    money = 30
     input = ''
     until input == 'stop'
       puts "Press ENTER for game or 'stop' to exit game"
@@ -303,7 +308,7 @@ class Pet
         money += win_variant[random]
       elsif money <= 0
         puts "#{@name} lost all the money"
-        puts "#{@name}: UNDERWEAR…!".colorize(:light_yellow)
+        puts "#{@name}: SA LA KA!".colorize(:light_yellow)
         @mood -= 4
         break
       else
@@ -317,7 +322,24 @@ class Pet
   end
 
   def game3
-    p " Game 'Roll the Dice'"
+    puts "Game 'Roll the Dice'"
+    sleep 1
+    puts "#{@name} roll the dice"
+    puts "#{@name}: HANA, DUL, SAE".colorize(:light_yellow)
+    puts "First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}"
+    puts 'Press ENTER to roll the dice'
+    gets
+    puts "First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}"
+    if your_dices > minions_dices
+      puts 'You win!'
+      puts "#{@name}: UNDERWEAR…".colorize(:light_yellow)
+      @mood -= 1
+    else
+      puts 'Minion win!'
+      puts "#{@name}: KAMPAI!".colorize(:light_yellow)
+      @mood += 3
+    end
+    passed_time
   end
 
   def roll
