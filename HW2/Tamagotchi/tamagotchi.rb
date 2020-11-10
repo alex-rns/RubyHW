@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require 'colorize'
-# String.color_samples
 
-# class Minion
-class Minion
+# class Pet creates a pet for game
+class Pet
   def initialize(name)
     @name = name
     @life = 3
@@ -81,9 +80,9 @@ class Minion
       puts 'Input 1 for walk or 2 for feed minion.'
       walk_choise = gets.chomp.strip
       case walk_choise
-      when "1"
+      when '1'
         walk
-      when "2"
+      when '2'
         feed
       else
         puts 'Unknown command. Please input 1 or 2.'.colorize(:red)
@@ -120,12 +119,12 @@ class Minion
       puts 'The minion thought of a number from 1 to 100, guess the number.'
       number = rand(1..100)
       input = ''
-      until input == "stop"
+      until input == 'stop'
         puts "Input number or 'stop' to exit game:"
         input = gets.chomp
         if input.to_i > number
           puts 'Your number is greater.'
-        elsif input.to_i  < number
+        elsif input.to_i < number
           puts 'Your number is less.'
         else
           puts "Right! Guess number - #{number}"
@@ -148,11 +147,11 @@ class Minion
         '750' => 600,
         '760' => 700,
         '770' => 800,
-        '777' => 10000,
+        '777' => 10_000
       }
       money = 2
       input = ''
-      until input == "stop"
+      until input == 'stop'
         puts "Press ENTER for game or 'stop' to exit game"
         input = gets.chomp
         random = rand(700..780).to_s
@@ -167,11 +166,11 @@ class Minion
           @mood -= 4
           break
         else
-          puts "Minion lost 50 cent."
+          puts 'Minion lost 50 cent.'
           money -= 0.5
         end
         puts "Combination: #{random}"
-        puts "Minion balance is #{money}", ""
+        puts "Minion balance is #{money}", ''
       end
       passed_time
     else
@@ -209,7 +208,6 @@ class Minion
   private
 
   def passed_time
-
     @age += 1
     @hunger += 1
     @wc += 1
@@ -241,7 +239,7 @@ class Minion
       puts "#{@name}: TATATA BALA TU!".colorize(:light_yellow)
     end
 
-    #sleep
+    # sleep
     if @sleep >= 16
       @mood -= 1
       puts 'Attention! Minion wants to sleep!'.colorize(:red)
@@ -291,7 +289,7 @@ class Minion
     puts "#{@name}: KAMPAI!".colorize(:light_yellow)
     @wc = 0
     @mood += 5
-    @hunger += 3
+    @hunger += rand(2..4)
     passed_time
   end
 
@@ -303,38 +301,25 @@ class Minion
     @sleep = 0
     @wc = 0
     @study = 0
-    if @evolution
-      @name = @name.delete_prefix("Super")
-    end
+    @name = @name.delete_prefix('Super') if @evolution
     @evolution = false
   end
 
   def roll
-    1 + rand(6)
+    rand(1..6)
   end
-  # def random_animation i
-  #   5.times do
-  #     i = rand(0..5)
-  #     print i
-  #     sleep 0.3
-  #     print "\b"
-  #   end
-  #   print i
-  #   print "  "
-  # end
-
 end
-
-# puts 'Welcome to the tamagotchi game! Your pet is a minion.'
-# puts 'Please enter minion\'s name:'
-# input_name = gets.chomp.strip
-# pet = Minion.new(input_name)
-pet = Minion.new('Stuard')
+puts 'For colorizing text install gem colorize'
+puts 'Welcome to the tamagotchi game! Your pet is a minion.'
+puts 'Please enter minion\'s name:'
+input_name = gets.chomp.strip.capitalize
+pet = Pet.new(input_name)
+# pet = Pet.new('Stuard')
 
 command = ''
 until command == 'exit'
   puts '---------------------------------------------------'
-  puts 'Please input command:'
+  puts 'Please input command or type help:'
   command = gets.chomp.strip
   case command
   when 'help', '1'
@@ -358,18 +343,6 @@ until command == 'exit'
   when 'exit', '10'
     exit
   else
-    puts command + ' unknown command. To get list of commands type help'
+    puts "#{command} unknown command. To get list of commands type help"
   end
 end
-
-#
-#
-# pet.feed
-# pet.sleep
-# pet.sleep
-# pet.status
-
-
-
-
-

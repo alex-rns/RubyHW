@@ -1,34 +1,53 @@
-# **Tamagochi minion**
+# **Project "BANANA" (or Tamagotchi minion)**
 
+By Oleksandr Bielodubrovskyi
 
+##Description:
+This project was created to practice object-oriented ruby.
 
-### Requirements 
+##Requirements 
 
 - Ruby 2.0
 - git (optional)
+- ruby gem colorize (optional)
 
-### Download <img class="emoji" alt="arrow_down" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/unicode/2b07.png">
+##Download
 
-####Using git
-
-Open your Terminal and write:
-
+Clone this repository into your computer:
 ```sh
 $ git clone https://github.com/alex-rns/RubyHW/
 ```
+or download from [git](https://github.com/alex-rns/RubyHW)
 
-####Without git
+To install gem colorize:
+```sh
+$ gem install colorize
+```
+
+## How to start playing
+
+- Go```$ cd HW2/Tamagotchi ``` and run ```tamagotchi.rb```
+- Enter the name of you pet.
 
 
+## Specification
 
+- When the user start playing he needs to enter Tamagotchi's name.
+- The Minion appears and you can start playing with him. 
+- The Minion has basic characteristics that the user can see by entering the appropriate command. This characteristics are: **age**, **life**, **mood**, **hunger**, **sleep**, **WC**, **study**. Minion status for this moment can be viewed by entering `status`
+- Minion's characteristics change after each interaction with him. There is no time limit in the world of Tamagotchi. The Minion will live as long as the user takes care of it.
+- The user can interact with the Minion using the commands: `feed`, `sleep`, `wc`, `walk`, `study`, `clean` and `play`. After executing these commands, the characteristics of the Minion changes. All commands can be viewed by entering `help`
+- The Minion has 3 lifes that he can lose under certain conditions, which the Minion and the system will warn the user about.
+- When the Minion dies, the base characteristics are reset and 1 life is spent. With the loss of all lives, the game ends.
+- The color of regular messages from the system is white, the system alerts are red, and the Minion's responses are yellow.(With installed [gem colorize](https://github.com/fazibear/colorize))
+- Bonus: Under certain circumstances, Minion can evolve.
 
-### How to start playing
+The aim is to look after your pet by feeding him and keeping him entertained.
 
-Go```$ cd HW2/Tamagotchi ``` and run ```tamagothi.rb```
+##Technologies Used
 
-
-
-https://img.shields.io/badge/tamagotchi-game-blue
+- ruby
+- gem colorize
 
 License
 ----
