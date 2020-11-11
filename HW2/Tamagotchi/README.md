@@ -77,36 +77,6 @@ The aim is to look after your pet by feeding him and keeping him entertained.
 | Bananonina | Ugly |
 | Po ka | What |
 
-* До свиданья — Poopaye
-> 
-Спасибо -Tank yu
-Прости — Bi-do
-Ну что, начнём? — Pwede na?
-Для тебя — Para tu
-Как ты смеешь? -Sa la ka!
-Что происходит? — Bulaka
-Ненавижу тебя — Tatata bala tu
-Клянусь… — Underwear…
-Я голоден — Me want banana
-Посмотри на себя — Luk at tu
-Мы любим тебя — Tulaliloo ti amo
-Банан — Ba-na-na
-Картошка — Potato
-Яблоки — Babbles/Papples
-Мороженое — Gelato
-Низ — Buttom
-Зад — Butt
-Стул — Chasy
-Ура — Kampai
-Огонь — BEE DO BEE DO BEE DO
-Поцелуй, поцелуй — Muak Muak Muak
-Свадьба — La boda
-Стоп – Stupa
-Бомба — Bomba
-Игрушка — Papoy
-Уродливый — Bananonina
-Что — Po ka
-
 
 ## Technologies Used
 

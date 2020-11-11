@@ -127,6 +127,19 @@ class Pet
     end
   end
 
+  def super_skill
+    if @evolution
+      puts 'All parameters are restored!'
+      puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+      @hunger = 0
+      @wc = 0
+      @sleep = 0
+      @mood = 20
+    else
+      p 'Sorry, but you minion has not evolved yet'
+    end
+  end
+
   def status
     puts '----------------Your minion status-----------------'.colorize(:cyan)
     puts @name.colorize(:light_yellow)
@@ -151,7 +164,8 @@ class Pet
     puts '7 or study'
     puts '8 or clean'
     puts '9 or play'
-    puts '10 or exit'
+    puts '10 or super-skill'
+    puts '11 or exit'
   end
 
   private
@@ -165,11 +179,11 @@ class Pet
 
     # evolution
     unless @evolution
-      if @age >= 40 && @study >= 30
+      if @age >= 10 && @study >= 10
         puts 'WOWOWOWOWOWOWOWOW!!!!!!'.colorize(:green)
         puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
         @name = "Super#{@name}"
-        puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+        puts "#{@name}: BULAKA!".colorize(:light_yellow)
         @life += 1
         @evolution = true
       end
@@ -234,7 +248,7 @@ class Pet
 
     # parameter limit
     @mood = 0 if @mood.negative?
-    @mood = 10 if @mood > 10
+    @mood = 20 if @mood > 20
     @sleep = 10 if @sleep > 10
   end
 
@@ -347,6 +361,7 @@ class Pet
   end
 end
 puts 'For colorizing text install gem colorize'
+puts '---------------------------------------------------'
 puts 'Welcome to the tamagotchi game! Your pet is a minion.'
 puts 'Please enter minion\'s name:'
 input_name = gets.chomp.strip.capitalize
@@ -377,7 +392,9 @@ until command == 'exit'
     pet.clean_up
   when 'play', '9'
     pet.play
-  when 'exit', '10'
+  when 'super-skill', '10'
+    pet.super_skill
+  when 'exit', '11'
     exit
   else
     puts "#{command} unknown command. To get list of commands type help"
