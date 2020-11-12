@@ -178,15 +178,13 @@ class Pet
     @mood -= 1
 
     # evolution
-    unless @evolution
-      if @age >= 10 && @study >= 10
-        puts 'WOWOWOWOWOWOWOWOW!!!!!!'.colorize(:green)
-        puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
-        @name = "Super#{@name}"
-        puts "#{@name}: BULAKA!".colorize(:light_yellow)
-        @life += 1
-        @evolution = true
-      end
+    if !@evolution && @age >= 40 && @study >= 30
+      puts 'WOWOWOWOWOWOWOWOW!!!!!!'.colorize(:green)
+      puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
+      @name = "Super#{@name}"
+      puts "#{@name}: BULAKA!".colorize(:light_yellow)
+      @life += 1
+      @evolution = true
     end
 
     # hunger
