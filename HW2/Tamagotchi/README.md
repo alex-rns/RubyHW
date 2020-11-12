@@ -47,35 +47,35 @@ The aim is to look after your pet by feeding him and keeping him entertained.
 ### Minion's dictionary
 | Minion's language | English |
 | ------ | ------ |
-| Hana | One |
-| Dul | Two |
-| Sae | Three |
-| Bello | Hello |
-| Poopaye | Googbye |
-| Bi-do | Sorry |
-| Pwede na? | Let's begin? |
-| Tatata bala tu | Hate you |
-| Underwear… | Swear |
-| Me want banana | I am hungry |
-| Luk at tu | Look at you |
-| Para tu | For you |
-| Tank yu | Thank you |
-| Sa la ka! | How dare you? |
-| Bulaka | What's happening? |
-| Tulaliloo ti amo | I love you |
-| Ba-na-na | Banana |
-| Potato | Potato |
-| Babbles | Apples |
-| Gelato | Ice cream |
-| Buttom | Down |
-| Kampai | Hooray |
+| HANA | One |
+| DUL | Two |
+| SAE | Three |
+| BELLO | Hello |
+| POOPAYE | Googbye |
+| BI-DO | Sorry |
+| PWEDE NA? | Let's begin? |
+| TATATA BALA TU | Hate you |
+| UNDERWEAR… | Swear |
+| ME WANT BANANA | I am hungry |
+| LUK AT TU | Look at you |
+| PARA TU | For you |
+| TANK YU | Thank you |
+| SA LA KA! | How dare you? |
+| BULAKA | What's happening? |
+| TULALILOO TI AMO | I love you |
+| BA-NA-NA | Banana |
+| POTATO | Potato |
+| BABBLES | Apples |
+| GELATO | Ice cream |
+| BUTTOM | Down |
+| KAMPAI | Hooray |
 | BEE DO BEE DO BEE DO | Fire |
-| Muak Muak Muak | Kiss |
-| Stupa | Stop |
-| Bomba | Bomb |
-| Papoy | Toy |
-| Bananonina | Ugly |
-| Po ka | What |
+| MUAK MUAK MUAK | Kiss |
+| STUPA | Stop |
+| BOMBA | Bomb |
+| PAPOY | Toy |
+| BANANONINA | Ugly |
+| PO KA | What |
 
 
 ## Technologies Used

@@ -78,8 +78,8 @@ class Pet
     if @hunger >= 6
       puts 'Attention! The walk will take a long time. Recommended to feed minion before walk.'.colorize(:red)
       puts 'Input 1 for walk or 2 for feed minion.'
-      walk_choise = gets.chomp.strip
-      case walk_choise
+      walk_choice = gets.chomp.strip
+      case walk_choice
       when '1'
         walk
       when '2'
@@ -296,17 +296,7 @@ class Pet
   def game2
     p "Game 'Slot Machine'"
     p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
-    win_variant = {
-      '700' => 10,
-      '710' => 20,
-      '720' => 30,
-      '730' => 40,
-      '740' => 50,
-      '750' => 60,
-      '760' => 70,
-      '770' => 80,
-      '777' => 10_000
-    }
+    win_variant = { '700' => 10, '710' => 20, '720' => 30, '730' => 40, '740' => 50, '750' => 60, '760' => 70, '770' => 80, '777' => 10_000 }
     money = 30
     input = ''
     until input == 'stop'
@@ -358,6 +348,7 @@ class Pet
     rand(1..6)
   end
 end
+
 puts 'For colorizing text install gem colorize'
 puts '---------------------------------------------------'
 puts 'Welcome to the tamagotchi game! Your pet is a minion.'
