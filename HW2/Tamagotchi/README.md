@@ -47,35 +47,32 @@ The aim is to look after your pet by feeding him and keeping him entertained.
 ### Minion's dictionary
 | Minion's language | English |
 | ------ | ------ |
-| HANA | One |
-| DUL | Two |
-| SAE | Three |
-| BELLO | Hello |
-| POOPAYE | Googbye |
-| BI-DO | Sorry |
-| PWEDE NA? | Let's begin? |
-| TATATA BALA TU | Hate you |
-| UNDERWEAR… | Swear |
-| ME WANT BANANA | I am hungry |
-| LUK AT TU | Look at you |
-| PARA TU | For you |
-| TANK YU | Thank you |
-| SA LA KA! | How dare you? |
-| BULAKA | What's happening? |
-| TULALILOO TI AMO | I love you |
 | BA-NA-NA | Banana |
-| POTATO | Potato |
 | BABBLES | Apples |
-| GELATO | Ice cream |
-| BUTTOM | Down |
-| KAMPAI | Hooray |
 | BEE DO BEE DO BEE DO | Fire |
-| MUAK MUAK MUAK | Kiss |
-| STUPA | Stop |
+| BELLO | Hello |
+| BI-DO | Sorry |
 | BOMBA | Bomb |
+| BULAKA | What's happening? |
+| BUTTOM | Down |
+| GELATO | Ice cream |
+| HANA, DUL, SAE | One, two, three |
+| KAMPAI | Hooray |
+| LUK AT TU | Look at you |
+| ME WANT BANANA | I am hungry |
+| MUAK MUAK MUAK | Kiss |
 | PAPOY | Toy |
-| BANANONINA | Ugly |
+| PARA TU | For you |
 | PO KA | What |
+| POOPAYE | Googbye |
+| POTATO | Potato |
+| PWEDE NA? | Let's begin? |
+| SA LA KA! | How dare you? |
+| STUPA | Stop |
+| TANK YU | Thank you |
+| TATATA BALA TU | Hate you |
+| TULALILOO TI AMO | I love you |
+| UNDERWEAR… | Swear |
 
 
 ## Technologies Used
