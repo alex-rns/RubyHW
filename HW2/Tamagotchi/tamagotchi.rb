@@ -1,7 +1,7 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 require 'colorize'
-
+require 'content_to_html'
 # class Pet creates a pet for game
 class Pet
   def initialize(name)
@@ -176,6 +176,14 @@ class Pet
     @wc += 1
     @sleep += 1
     @mood -= 1
+
+    content = "
+      <p>@name: #{@name}</p>
+      <p>@life: #{@life}</p>
+      <p>@age: #{@age}</p>
+      <p>@mood: #{@mood}</p>
+      "
+    to_html(content, true)
 
     # evolution
     if !@evolution && @age >= 40 && @study >= 30
