@@ -1,9 +1,22 @@
 # frozen_string_literal: false
 
 require 'colorize'
-require 'content_to_html'
+require 'display_content'
 # class Pet creates a pet for game
 class Pet
+  attr_reader :name
+  attr_reader :life
+  attr_reader :age
+  attr_reader :mood
+  attr_reader :hunger
+  attr_reader :sleep
+  attr_reader :wc
+  attr_reader :study
+  attr_reader :poo_poo
+  attr_reader :evolution
+  attr_reader :minion_phrase
+  attr_reader :phrase
+
   def initialize(name)
     @name = name
     @life = 3
@@ -15,6 +28,8 @@ class Pet
     @study = 0
     @poo_poo = 0
     @evolution = false
+    @minion_phrase = ''
+    @phrase = ''
 
     print "
 ────────▄▀▀═════════════▀▀▄
@@ -48,16 +63,30 @@ class Pet
     puts "#{@name}: BELLO!".colorize(:light_yellow)
   end
 
+  def to_front(text, minion = true, warning = false)
+    if minion
+      puts text.colorize(:light_yellow)
+      @minion_phrase = text
+    else
+      @phrase = text
+      if warning
+        puts text.colorize(:red)
+      else
+        puts text
+      end
+    end
+  end
+
   def feed
-    puts "You give #{@name} his favorite food"
-    puts @name.colorize(:light_yellow) + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s.colorize(:light_yellow)
+    to_front("You give #{@name} his favorite food", false)
+    to_front(@name + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s)
     @hunger = -1
     passed_time
   end
 
   def go_sleep
     if @wc >= 7 || @hunger >= 7
-      puts 'Attention! Minion can not sleep. Something bothers him.'.colorize(:red)
+      to_front('Attention! Minion can not sleep. Something bothers him.', false, true)
       puts "#{@name}: BULAKA".colorize(:light_yellow)
     else
       puts "You put #{@name} to bed."
@@ -68,8 +97,8 @@ class Pet
   end
 
   def go_wc
-    puts 'Minion goes to the toilet'
-    puts "#{@name}: PWEDE NA?".colorize(:light_yellow)
+    to_front('Minion goes to the toilet', false)
+    to_front("#{@name}: PWEDE NA?")
     @wc = 0
     passed_time
   end
@@ -92,7 +121,7 @@ class Pet
     end
   end
 
-  def study
+  def teach
     puts 'You minion is learning Ruby'
     puts "#{@name}: WOW! BOBMA!".colorize(:light_yellow)
     if @mood < 4
@@ -149,7 +178,7 @@ class Pet
     puts "Hunger: #{@hunger * 10}%".colorize(:cyan)
     puts "Sleep: #{@sleep * 5}%".colorize(:cyan)
     puts "WC: #{@wc * 10}%".colorize(:cyan)
-    puts "Study: level #{@study}".colorize(:cyan)
+    puts "Education: level #{@study}".colorize(:cyan)
     puts '---------------------------------------------------'.colorize(:cyan)
   end
 
@@ -161,7 +190,7 @@ class Pet
     puts '4 or sleep'
     puts '5 or wc'
     puts '6 or walk'
-    puts '7 or study'
+    puts '7 or teach'
     puts '8 or clean'
     puts '9 or play'
     puts '10 or super-skill'
@@ -176,14 +205,6 @@ class Pet
     @wc += 1
     @sleep += 1
     @mood -= 1
-
-    content = "
-      <p>@name: #{@name}</p>
-      <p>@life: #{@life}</p>
-      <p>@age: #{@age}</p>
-      <p>@mood: #{@mood}</p>
-      "
-    to_html(content, true)
 
     # evolution
     if !@evolution && @age >= 40 && @study >= 30
@@ -368,6 +389,52 @@ pet = Pet.new(input_name)
 command = ''
 until command == 'exit'
   puts '---------------------------------------------------'
+
+  content = "
+  <header>#{pet.name}</header>
+<main>
+  <section>
+    <ul>
+      <li>Life: <strong>#{pet.life}</strong></li>
+      <li>Age: <strong>#{pet.age}</strong></li>
+      <li>Mood: <strong>3</strong></li>
+      <li>Hunger: <strong>3</strong></li>
+      <li>Sleep: <strong>3</strong></li>
+      <li>WC: </li>
+      <li>Education: </li>
+
+      <li>Poo-poo</li>
+      <li>Evolution</li>
+    </ul>
+  </section>
+
+  <article>
+    <div>
+      <p>#{pet.phrase}</p>
+    </div>
+    <div>
+      <p>#{pet.minion_phrase}</p>
+    </div>
+  </article>
+  <aside>Aside</aside>
+</main>
+<footer>
+<p>List of available commands:
+1 or help
+2 or status
+3 or feed
+4 or sleep
+5 or wc
+6 or walk
+7 or teach
+8 or clean
+9 or play
+10 or super-skill
+11 or exit</p>
+</footer>
+"
+
+  DisplayContent.display_content(content, true, "page")
   puts 'Please input command or type help:'
   command = gets.chomp.strip
   case command
@@ -383,8 +450,8 @@ until command == 'exit'
     pet.go_wc
   when 'walk', '6'
     pet.walk_check
-  when 'study', '7'
-    pet.study
+  when 'teach', '7'
+    pet.teach
   when 'clean', '8'
     pet.clean_up
   when 'play', '9'
