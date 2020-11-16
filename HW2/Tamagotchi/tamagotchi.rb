@@ -4,18 +4,7 @@ require 'colorize'
 require 'display_content'
 # class Pet creates a pet for game
 class Pet
-  attr_reader :name
-  attr_reader :life
-  attr_reader :age
-  attr_reader :mood
-  attr_reader :hunger
-  attr_reader :sleep
-  attr_reader :wc
-  attr_reader :study
-  attr_reader :poo_poo
-  attr_reader :evolution
-  attr_reader :minion_phrase
-  attr_reader :phrase
+  attr_reader :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase, :attention_phrase
 
   def initialize(name)
     @name = name
@@ -67,19 +56,19 @@ class Pet
     if minion
       puts text.colorize(:light_yellow)
       @minion_phrase = text
+    elsif warning
+      @attention_phrase = text
+      puts text.colorize(:red)
     else
       @phrase = text
-      if warning
-        puts text.colorize(:red)
-      else
-        puts text
-      end
+      puts text
     end
   end
 
   def feed
     to_front("You give #{@name} his favorite food", false)
     to_front(@name + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s)
+    to_front('', false, true)
     @hunger = -1
     passed_time
   end
@@ -87,10 +76,10 @@ class Pet
   def go_sleep
     if @wc >= 7 || @hunger >= 7
       to_front('Attention! Minion can not sleep. Something bothers him.', false, true)
-      puts "#{@name}: BULAKA".colorize(:light_yellow)
+      to_front("#{@name}: BULAKA")
     else
-      puts "You put #{@name} to bed."
-      puts "#{@name}: MUAK MUAK MUAK!".colorize(:light_yellow)
+      to_front("You put #{@name} to bed.", false)
+      to_front("#{@name}: MUAK MUAK MUAK!")
       @sleep = 0
       2.times { passed_time }
     end
@@ -99,14 +88,14 @@ class Pet
   def go_wc
     to_front('Minion goes to the toilet', false)
     to_front("#{@name}: PWEDE NA?")
+    to_front('', false, true)
     @wc = 0
     passed_time
   end
 
   def walk_check
     if @hunger >= 6
-      puts 'Attention! The walk will take a long time. Recommended to feed minion before walk.'.colorize(:red)
-      puts 'Input 1 for walk or 2 for feed minion.'
+      to_front('Attention! The walk will take a long time. Recommended to feed minion before walk. Input 1 for walk or 2 for feed minion.', false, true)
       walk_choice = gets.chomp.strip
       case walk_choice
       when '1'
@@ -114,7 +103,7 @@ class Pet
       when '2'
         feed
       else
-        puts 'Unknown command. Please input 1 or 2.'.colorize(:red)
+        to_front('Unknown command. Please input 1 or 2.', false, true)
       end
     else
       walk
@@ -122,8 +111,8 @@ class Pet
   end
 
   def teach
-    puts 'You minion is learning Ruby'
-    puts "#{@name}: WOW! BOBMA!".colorize(:light_yellow)
+    to_front('You minion is learning Ruby', false)
+    to_front("#{@name}: WOW! BOBMA!")
     if @mood < 4
       @study += 1
     else
@@ -133,14 +122,13 @@ class Pet
   end
 
   def clean_up
-    puts 'We cleaned up around'
+    to_front('We cleaned up around', false)
     @poo_poo = 0
     passed_time
   end
 
   def play
-    puts 'Enter number of game if you want to play:'
-    puts '1 - Guess Number, 2 - Slot Machine, 3 - Roll The Dice, 4 - exit game list'
+    to_front('Enter number of game if you want to play: 1 - Guess Number, 2 - Slot Machine, 3 - Roll The Dice, 4 - exit game list', false)
     game = gets.chomp.strip
     case game
     when '1'
@@ -152,20 +140,21 @@ class Pet
     when '4'
       status
     else
-      puts 'Unknown command. Enter number of game.'
+      to_front('Unknown command. Enter number of game.', false)
     end
   end
 
   def super_skill
     if @evolution
-      puts 'All parameters are restored!'
-      puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+      to_front('All parameters are restored!', false)
+      to_front("#{@name}: BEE DO BEE DO BEE DO!")
       @hunger = 0
       @wc = 0
       @sleep = 0
       @mood = 20
     else
-      p 'Sorry, but you minion has not evolved yet'
+      to_front('Sorry, but you minion has not evolved yet', false)
+      to_front('')
     end
   end
 
@@ -208,67 +197,65 @@ class Pet
 
     # evolution
     if !@evolution && @age >= 40 && @study >= 30
-      puts 'WOWOWOWOWOWOWOWOW!!!!!!'.colorize(:green)
-      puts "#{@name} evolve into a Super#{@name}!".colorize(:green)
+      to_front("WOWOWOWOWOWOWOWOW!!!!!! #{@name} evolve into a Super#{@name}!", false)
       @name = "Super#{@name}"
-      puts "#{@name}: BULAKA!".colorize(:light_yellow)
+      to_front("#{@name}: BULAKA!")
       @life += 1
       @evolution = true
     end
 
     # hunger
     if @hunger >= 8
-      puts 'Attention! Feed your minion!'.colorize(:red)
-      puts "#{@name}: ME WANT BANANA!".colorize(:light_yellow)
+      to_front('Attention! Feed your minion!', false, true)
+      to_front("#{@name}: ME WANT BANANA!")
     end
     if @hunger >= 10
       die
-      puts 'You did not feed your minion'.colorize(:red)
-      puts "#{@name} lost one life, #{@life} left".colorize(:red)
-      puts "#{@name}: TATATA BALA TU!".colorize(:light_yellow)
+      to_front("You did not feed your minion. #{@name} lost one life, #{@life} left", false, true)
+      to_front("#{@name}: TATATA BALA TU!")
     end
 
     # sleep
     if @sleep >= 16
       @mood -= 1
-      puts 'Attention! Minion wants to sleep!'.colorize(:red)
+      to_front('Attention! Minion wants to sleep!', false, true)
     end
     if @sleep >= 18
       @mood -= 3
-      puts 'Attention! Minion wants to sleep! Mood gets worse.'.colorize(:red)
+      to_front('Attention! Minion wants to sleep! Mood gets worse.', false, true)
     end
 
     # wc
     if @wc >= 8
-      puts 'Attention! Minion wants to go to the toilet!'.colorize(:red)
-      puts "#{@name}: STUPA! PEE-PEE!".colorize(:light_yellow)
+      to_front('Attention! Minion wants to go to the toilet!', false, true)
+      to_front("#{@name}: STUPA! PEE-PEE!")
     end
     if @wc >= 10
-      puts 'Your minion went to the toilet in jeans'.colorize(:red)
-      puts "#{@name}: OOOPS! BI-DO".colorize(:light_yellow)
+      to_front('Your minion went to the toilet in jeans', false, true)
+      to_front("#{@name}: OOOPS! BI-DO")
       @poo_poo += 1
       @wc = 0
     end
 
     # mood
     if @mood <= 3
-      puts 'Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.'.colorize(:red)
-      puts "#{@name}: PAPOY..".colorize(:light_yellow)
+      to_front('Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.', false, true)
+      to_front("#{@name}: PAPOY..")
     end
 
     # poo-poo
     if @poo_poo > 3
-      puts 'Attention! It is too dirty. Please clean around'.colorize(:red)
+      to_front('Attention! It is too dirty. Please clean around', false, true)
       @mood -= 1
     end
     if @poo_poo > 5
       die
-      puts "#{@name} is sick and lost one life, #{@life} left".colorize(:red)
+      to_front("#{@name} is sick and lost one life, #{@life} left", false, true)
     end
 
     # life
     if @life.zero?
-      puts "Minion has no lives left. You lost #{@name}".colorize(:red)
+      to_front("Minion has no lives left. You lost #{@name}", false, true)
       puts "#{@name}: POOPAYE...".colorize(:light_yellow)
       exit
     end
@@ -280,8 +267,8 @@ class Pet
   end
 
   def walk
-    puts "You go for a walk with #{@name}"
-    puts "#{@name}: KAMPAI!".colorize(:light_yellow)
+    to_front("You go for a walk with #{@name}", false)
+    to_front("#{@name}: KAMPAI!")
     @wc = 0
     @mood += 5
     @hunger += rand(2..4)
@@ -301,20 +288,20 @@ class Pet
   end
 
   def game1
-    puts "Game 'Guess Number'"
-    puts 'The minion thought of a number from 1 to 100, guess the number.'
+    to_front("Game 'Guess Number'", false)
+    to_front('The minion thought of a number from 1 to 100, guess the number.', false)
     number = rand(1..100)
     input = ''
     until input == 'stop'
-      puts "Input number or 'stop' to exit game:"
+      to_front("Input number or 'stop' to exit game:", false)
       input = gets.chomp
       if input.to_i > number
-        puts 'Your number is greater.'
+        to_front('Your number is greater.', false)
       elsif input.to_i < number
-        puts 'Your number is less.'
+        to_front('Your number is less.', false)
       else
-        puts "Right! Guess number - #{number}"
-        puts "#{@name}: TULALILOO TI AMO!".colorize(:light_yellow)
+        to_front("Right! Guess number - #{number}", false)
+        to_front("#{@name}: TULALILOO TI AMO!")
         @mood += 4
         break
       end
@@ -323,51 +310,51 @@ class Pet
   end
 
   def game2
-    p "Game 'Slot Machine'"
-    p 'Minion has 30 dollars. One game on a slot machine costs 50 cent.'
+    to_front("Game 'Slot Machine'", false)
+    to_front('Minion has 30 dollars. One game on a slot machine costs 50 cent.', false)
     win_variant = { '700' => 10, '710' => 20, '720' => 30, '730' => 40, '740' => 50, '750' => 60, '760' => 70, '770' => 80, '777' => 10_000 }
     money = 30
     input = ''
     until input == 'stop'
-      puts "Press ENTER for game or 'stop' to exit game"
+      to_front("Press ENTER for game or 'stop' to exit game", false)
       input = gets.chomp
       random = rand(700..780).to_s
       if win_variant[random]
-        puts "#{@name} win #{win_variant[random]} dollars."
-        puts "#{@name}: BEE DO BEE DO BEE DO!".colorize(:light_yellow)
+        to_front("#{@name} win #{win_variant[random]} dollars.", false)
+        to_front("#{@name}: BEE DO BEE DO BEE DO!")
         @mood += 8
         money += win_variant[random]
       elsif money <= 0
-        puts "#{@name} lost all the money"
-        puts "#{@name}: SA LA KA!".colorize(:light_yellow)
+        to_front("#{@name} lost all the money", false)
+        to_front("#{@name}: SA LA KA!")
         @mood -= 4
         break
       else
-        puts 'Minion lost 50 cent.'
+        to_front('Minion lost 50 cent.', false)
         money -= 0.5
       end
-      puts "Combination: #{random}"
-      puts "Minion balance is #{money}", ''
+      to_front("Combination: #{random}. Minion balance is #{money}", false)
     end
     passed_time
   end
 
   def game3
-    puts "Game 'Roll the Dice'"
-    sleep 1
-    puts "#{@name} roll the dice"
-    puts "#{@name}: HANA, DUL, SAE".colorize(:light_yellow)
-    puts "First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}"
-    puts 'Press ENTER to roll the dice'
+    to_front("Game 'Roll the Dice'", false)
+
+    to_front("#{@name} roll the dice", false)
+    to_front("#{@name}: HANA, DUL, SAE")
+
+    to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}. Press ENTER to roll the dice", false)
     gets
-    puts "First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}"
+    to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}", false)
+
     if your_dices > minions_dices
-      puts 'You win!'
-      puts "#{@name}: UNDERWEAR…".colorize(:light_yellow)
+      to_front('You win!', false)
+      to_front("#{@name}: UNDERWEAR…")
       @mood -= 1
     else
-      puts 'Minion win!'
-      puts "#{@name}: KAMPAI!".colorize(:light_yellow)
+      to_front('Minion win!', false)
+      to_front("#{@name}: KAMPAI!")
       @mood += 3
     end
     passed_time
@@ -391,7 +378,7 @@ until command == 'exit'
   puts '---------------------------------------------------'
 
   content = "
-  <header>#{pet.name}</header>
+  <header>#{pet.name} #{pet.attention_phrase}</header>
 <main>
   <section>
     <ul>
@@ -416,7 +403,7 @@ until command == 'exit'
       <p>#{pet.minion_phrase}</p>
     </div>
   </article>
-  <aside>Aside</aside>
+  <aside>&#x1F923;</aside>
 </main>
 <footer>
 <p>List of available commands:
@@ -434,7 +421,7 @@ until command == 'exit'
 </footer>
 "
 
-  DisplayContent.display_content(content, true, "page")
+  DisplayContent.display_content(content, true, 'page')
   puts 'Please input command or type help:'
   command = gets.chomp.strip
   case command
