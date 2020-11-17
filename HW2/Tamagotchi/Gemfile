@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+# Specify your gem's dependencies in display_content.gemspec
+gemspec
+
+gem "rake", "~> 12.0"
+gem "minitest", "~> 5.0"
+gem "erb"
+gem "display_content"
+gem "install colorize"

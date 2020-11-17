@@ -10,6 +10,7 @@ This project was created to practice object-oriented ruby.
 - Ruby 2.0
 - git (optional)
 - ruby gem colorize (optional)
+- ruby gem display_content (optional)
 
 ## Download
 
@@ -19,10 +20,22 @@ $ git clone https://github.com/alex-rns/RubyHW/
 ```
 or download from [git](https://github.com/alex-rns/RubyHW)
 
-To install gem colorize:
-```sh
-$ gem install colorize
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'display_content'
+gem 'install colorize'
 ```
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install display_content
+    $ gem install colorize
 
 ## How to start playing
 
@@ -78,7 +91,8 @@ The aim is to look after your pet by feeding him and keeping him entertained.
 ## Technologies Used
 
 - ruby
-- gem colorize
+- gem colorized
+- gem display_content
 
 License
 ----
