@@ -6,5 +6,5 @@ gemspec
 gem "rake", "~> 12.0"
 gem "minitest", "~> 5.0"
 gem "erb"
-gem "display_content"
 gem "install colorize"
+gem 'display_content', :path => 'display_content'
