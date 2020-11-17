@@ -13,10 +13,13 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #80CBC4;
   height: 15vh;
   text-align: center;
   font-weight: bold; }
+header span:last-child {
+  color: #b80000; }
 
 main {
   display: flex;
@@ -37,7 +40,6 @@ article {
   flex: 3;
   background: #d0b769; }
 article > div {
-  transition: 2s;
   height: 50%;
   display: flex;
   align-items: center; }
@@ -49,7 +51,6 @@ aside {
   background: #FFF176;
   display: flex; }
 aside p {
-  transition: 2s;
   margin: auto;
   font-size: 20vh; }
 
