@@ -51,7 +51,7 @@ class Pet
 ".colorize(:light_yellow)
     to_front("Minion #{name} came to you!", false)
     to_front("#{@name}: BELLO!")
-    @emoji = '&#x1F92A'
+    @emoji = '&#x1F92A;'
   end
 
   def to_front(text, minion = true, warning = false)
@@ -72,7 +72,7 @@ class Pet
     to_front(@name + [': BANANAA!', ': BA-NA-NA!', ': POTATO!', ': BABLE!', ': GELATO!'].sample.to_s)
     to_front('', false, true)
     @hunger = -1
-    @emoji = '&#x1F924'
+    @emoji = '&#x1F924;'
     passed_time
   end
 
@@ -80,12 +80,12 @@ class Pet
     if @wc >= 7 || @hunger >= 7
       to_front('Attention! Minion can not sleep. Something bothers him.', false, true)
       to_front("#{@name}: BULAKA")
-      @emoji = '&#x1F914'
+      @emoji = '&#x1F914;'
     else
       to_front("You put #{@name} to bed.", false)
       to_front("#{@name}: MUAK MUAK MUAK!")
       @sleep = 0
-      @emoji = '&#x1F634'
+      @emoji = '&#x1F634;'
       2.times { passed_time }
     end
   end
@@ -95,7 +95,7 @@ class Pet
     to_front("#{@name}: PWEDE NA?")
     to_front('', false, true)
     @wc = 0
-    @emoji = '&#x1F92B'
+    @emoji = '&#x1F92B;'
     passed_time
   end
 
@@ -124,14 +124,14 @@ class Pet
     else
       @study += 2
     end
-    @emoji = '&#x1F913'
+    @emoji = '&#x1F913;'
     passed_time
   end
 
   def clean_up
     to_front('We cleaned up around', false)
     @poo_poo = 0
-    @emoji = '&#x1F644'
+    @emoji = '&#x1F644;'
     to_front('')
     passed_time
   end
@@ -162,11 +162,11 @@ class Pet
       @wc = 0
       @sleep = 0
       @mood = 20
-      @emoji = '&#x1F92F'
+      @emoji = '&#x1F92F;'
     else
       to_front('Sorry, but you minion has not evolved yet', false)
       to_front('')
-      @emoji = '&#x1F97A'
+      @emoji = '&#x1F97A;'
     end
   end
 
@@ -214,14 +214,14 @@ class Pet
       to_front("#{@name}: BULAKA!")
       @life += 1
       @evolution = true
-      @emoji = '&#x1F608'
+      @emoji = '&#x1F608;'
     end
 
     # hunger
     if @hunger >= 8
       to_front('Attention! Feed your minion!', false, true)
       to_front("#{@name}: ME WANT BANANA!")
-      @emoji = '&#x1F34C'
+      @emoji = '&#x1F34C;'
     end
     if @hunger >= 10
       die
@@ -232,12 +232,12 @@ class Pet
     # sleep
     if @sleep >= 16
       @mood -= 1
-      @emoji = '&#x1F971'
+      @emoji = '&#x1F971;'
       to_front('Attention! Minion wants to sleep!', false, true)
     end
     if @sleep >= 18
       @mood -= 3
-      @emoji = '&#x1F974'
+      @emoji = '&#x1F974;'
       to_front('Attention! Minion wants to sleep! Mood gets worse.', false, true)
     end
 
@@ -245,21 +245,21 @@ class Pet
     if @wc >= 8
       to_front('Attention! Minion wants to go to the toilet!', false, true)
       to_front("#{@name}: STUPA! PEE-PEE!")
-      @emoji = '&#x1F629'
+      @emoji = '&#x1F629;'
     end
     if @wc >= 10
       to_front('Your minion went to the toilet in jeans', false, true)
       to_front("#{@name}: OOOPS! BI-DO")
       @poo_poo += 1
       @wc = 0
-      @emoji = '&#x1F4A9'
+      @emoji = '&#x1F4A9;'
     end
 
     # mood
     if @mood <= 3
       to_front('Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.', false, true)
       to_front("#{@name}: PAPOY..")
-      @emoji = '&#x1F61E'
+      @emoji = '&#x1F61E;'
     end
 
     # poo-poo
@@ -276,7 +276,7 @@ class Pet
     if @life.zero?
       to_front("Minion has no lives left. You lost #{@name}", false, true)
       to_front("#{@name}: POOPAYE...")
-      @emoji = '&#x2620'
+      @emoji = '&#x2620;'
       exit
     end
 
@@ -292,7 +292,7 @@ class Pet
     @wc = 0
     @mood += 5
     @hunger += rand(2..4)
-    @emoji = '&#x1F601'
+    @emoji = '&#x1F601;'
     passed_time
   end
 
@@ -306,7 +306,7 @@ class Pet
     @study = 0
     @name = @name.delete_prefix('Super') if @evolution
     @evolution = false
-    @emoji = '&#x1F631'
+    @emoji = '&#x1F631;'
     to_front('', false, true)
   end
 
@@ -326,7 +326,7 @@ class Pet
         to_front("Right! Guess number - #{number}", false)
         to_front("#{@name}: TULALILOO TI AMO!")
         @mood += 4
-        @emoji = '&#x1F61D'
+        @emoji = '&#x1F61D;'
         break
       end
     end
@@ -359,7 +359,7 @@ class Pet
       end
       to_front("Combination: #{random}. Minion balance is #{money}", false)
     end
-    @emoji = '&#x1F911'
+    @emoji = '&#x1F911;'
     passed_time
   end
 
@@ -376,12 +376,12 @@ class Pet
     if your_dices > minions_dices
       to_front('You win!', false)
       to_front("#{@name}: UNDERWEAR…")
-      @emoji = '&#x1F620'
+      @emoji = '&#x1F620;'
       @mood -= 1
     else
       to_front('Minion win!', false)
       to_front("#{@name}: KAMPAI!")
-      @emoji = '&#x1F973'
+      @emoji = '&#x1F973;'
       @mood += 3
     end
     passed_time
@@ -437,6 +437,9 @@ until command == 'exit'
   <p>List of available commands:</p>
   <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach, 8 - clean, 9 - play, 10 - super-skill, 11 - exit</p>
 </footer>
+<script>
+  setInterval(()=>{window.location.reload()}, 1000)
+</script>
 "
   DisplayContent.display_content(content, true, 'page')
   puts 'Please input command or type help:'
