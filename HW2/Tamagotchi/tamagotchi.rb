@@ -441,7 +441,7 @@ until command == 'exit'
   setInterval(()=>{window.location.reload()}, 1000)
 </script>
 "
-  DisplayContent.display_content(content, true, 'page')
+  DisplayContent.display_content(content, true)
   puts 'Please input command or type help:'
   command = gets.chomp.strip
   case command
