@@ -3,7 +3,4 @@
 source 'https://rubygems.org'
 
 gem 'colorize'
-gem 'display_content', path: 'display_content'
-gem 'erb'
-gem 'minitest', '~> 5.0'
-gem 'rake', '~> 12.0'
+gem 'display_content', path: './display_content'

@@ -9,8 +9,8 @@ This project was created to practice object-oriented ruby.
 
 - Ruby 2.3.0
 - git (optional)
-- ruby gem colorize (optional)
-- ruby gem display_content (optional)
+- ruby gem "colorize" (optional)
+- ruby gem "display_content" (optional)
 
 ## Download
 
@@ -20,7 +20,7 @@ $ git clone https://github.com/alex-rns/RubyHW/
 ```
 or download from [git](https://github.com/alex-rns/RubyHW)
 
-Optional clone gem display_content:
+Optional clone gem "display_content":
 
 ```sh
 $ git clone https://github.com/display_content
@@ -41,14 +41,18 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install display_content
     $ gem install colorize
+
+To install "display_content" ```cd disaplay_content``` and
+
+    $ gem build display_content.gemspec
+    $ gem install display_content
 
 ## How to start playing
 
-- Go```$ cd HW2/Tamagotchi ``` and run ```tamagotchi.rb```
+- Go```$ cd HW2/Tamagotchi ``` and run ```pet.rb```
 - Enter the name of you pet.
-- If you have installed the"display_content" gem run ```index.html```, that was created in the project folder.
+- If you have installed the "display_content" gem run ```index.html```, that was created in the project folder.
 
 
 ## Specification
