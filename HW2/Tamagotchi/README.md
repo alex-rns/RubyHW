@@ -2,6 +2,9 @@
 
 By Oleksandr Bielodubrovskyi
 
+![minion_screen](https://user-images.githubusercontent.com/23439223/99804939-6f4cb280-2b44-11eb-9cf1-7aa48d0bc772.png)
+
+
 ## Description:
 This project was created to practice object-oriented ruby.
 
@@ -43,7 +46,7 @@ Or install it yourself as:
 
     $ gem install colorize
 
-To install "display_content" ```cd disaplay_content``` and
+To install "display_content" ```cd display_content``` and
 
     $ gem build display_content.gemspec
     $ gem install display_content
@@ -52,7 +55,7 @@ To install "display_content" ```cd disaplay_content``` and
 
 - Go```$ cd HW2/Tamagotchi ``` and run ```pet.rb```
 - Enter the name of you pet.
-- If you have installed the "display_content" gem run ```index.html```, that was created in the project folder.
+- If you have installed the "display_content" gem run ```index.html```, that was created in folder.
 
 
 ## Specification
