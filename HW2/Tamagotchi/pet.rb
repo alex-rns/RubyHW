@@ -3,10 +3,16 @@
 require "colorize"
 require "display_content"
 # class Pet creates a pet for game
-class Pet
-  attr_reader :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase, :attention_phrase, :emoji
+ROLE = {
+  superadmin: "12345",
+  admin: "1234",
+  user: "123"
+}
 
-  def initialize(name)
+class Pet
+  attr_accessor :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase, :attention_phrase, :emoji, :owner
+
+  def initialize(name = "Stuart")
     @name = name
     @life = 3
     @age = 0
@@ -20,6 +26,7 @@ class Pet
     @minion_phrase = ""
     @phrase = ""
     @emoji = ""
+    @owner = ""
 
     print "
 ────────▄▀▀═════════════▀▀▄
@@ -394,7 +401,31 @@ end
 
 puts "For colorizing text install gem colorize"
 puts "---------------------------------------------------"
-puts "Welcome to the tamagotchi game! Your pet is a minion."
+pet = Pet.new
+# Authorization
+authorization = ''
+until authorization == "exit" || pet.owner != ""
+  puts "Enter your name:"
+  login_name = gets.chomp
+  puts "Enter your password:"
+  login_pass = gets.chomp
+
+  ROLE.each_pair do |key, value|
+    if key.to_s == login_name && value == login_pass
+      pet.owner = key
+      puts "You logged in as #{key}"
+    else
+      puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
+    end
+  end
+end
+
+puts pet.owner
+
+
+
+
+puts "Welcome to the tamagotchi game #{pet.owner}! Your pet is a minion."
 puts "Please enter minion's name:"
 input_name = gets.chomp.strip.capitalize
 pet = Pet.new(input_name)
