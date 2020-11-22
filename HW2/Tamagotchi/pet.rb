@@ -28,7 +28,22 @@ class Pet
     @phrase = ""
     @emoji = ""
     @owner = ""
+  end
 
+  def to_front(text, minion = true, warning = false)
+    if minion
+      puts text.colorize(:light_yellow)
+      @minion_phrase = text
+    elsif warning
+      @attention_phrase = text
+      puts text.colorize(:red)
+    else
+      @phrase = text
+      puts text
+    end
+  end
+
+  def welcome
     print "
 ────────▄▀▀═════════════▀▀▄
 ───────█═══════════════════█
@@ -60,19 +75,6 @@ class Pet
     to_front("Minion #{name} came to you!", false)
     to_front("#{@name}: BELLO!")
     @emoji = "&#x1F92A;"
-  end
-
-  def to_front(text, minion = true, warning = false)
-    if minion
-      puts text.colorize(:light_yellow)
-      @minion_phrase = text
-    elsif warning
-      @attention_phrase = text
-      puts text.colorize(:red)
-    else
-      @phrase = text
-      puts text
-    end
   end
 
   def feed
@@ -399,6 +401,7 @@ pet = Pet.new
 
 authorization = ""
 until authorization == "exit" || pet.owner != ""
+  puts "Please enter your username and password to start"
   puts "Enter your name:"
   login_name = gets.chomp
   exit if login_name == "exit"
@@ -414,11 +417,12 @@ until authorization == "exit" || pet.owner != ""
   end
 end
 
-puts "Welcome to the tamagotchi game #{pet.owner}! Your pet is a minion."
+puts "---------------------------------------------------"
+puts "Welcome to the tamagotchi game, #{pet.owner}! Your pet is a minion."
 puts "Please enter minion's name:"
-input_name = gets.chomp.strip.capitalize
-pet = Pet.new(input_name)
-# pet = Pet.new('Stuard')
+pet.name = gets.chomp.strip.capitalize
+pet.welcome
+p pet.owner
 
 command = ""
 until command == "exit"
