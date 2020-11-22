@@ -402,28 +402,24 @@ end
 puts "For colorizing text install gem colorize"
 puts "---------------------------------------------------"
 pet = Pet.new
+
 # Authorization
-authorization = ''
+authorization = ""
 until authorization == "exit" || pet.owner != ""
   puts "Enter your name:"
   login_name = gets.chomp
+  exit if login_name == "exit"
   puts "Enter your password:"
   login_pass = gets.chomp
 
-  ROLE.each_pair do |key, value|
-    if key.to_s == login_name && value == login_pass
-      pet.owner = key
-      puts "You logged in as #{key}"
-    else
-      puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
-    end
+  user = ROLE.find { |key, value| key.to_s == login_name && value == login_pass }
+  if user.nil?
+    puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
+  else
+    pet.owner = user[0]
+    puts "You logged in as #{pet.owner}"
   end
 end
-
-puts pet.owner
-
-
-
 
 puts "Welcome to the tamagotchi game #{pet.owner}! Your pet is a minion."
 puts "Please enter minion's name:"
