@@ -2,13 +2,14 @@
 
 require "colorize"
 require "display_content"
-# class Pet creates a pet for game
+
 ROLE = {
   superadmin: "12345",
   admin: "1234",
   user: "123"
 }
 
+# class Pet creates a pet for game
 class Pet
   attr_accessor :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase, :attention_phrase, :emoji, :owner
 
@@ -214,7 +215,6 @@ class Pet
     @sleep += 1
     @mood -= 1
 
-    # evolution
     if !@evolution && @age >= 40 && @study >= 30
       to_front("WOWOWOWOWOWOWOWOW!!!!!! #{@name} evolve into a Super#{@name}!", false)
       @name = "Super#{@name}"
@@ -224,7 +224,6 @@ class Pet
       @emoji = "&#x1F608;"
     end
 
-    # hunger
     if @hunger >= 8
       to_front("Attention! Feed your minion!", false, true)
       to_front("#{@name}: ME WANT BANANA!")
@@ -236,7 +235,6 @@ class Pet
       to_front("#{@name}: TATATA BALA TU!")
     end
 
-    # sleep
     if @sleep >= 16
       @mood -= 1
       @emoji = "&#x1F971;"
@@ -248,7 +246,6 @@ class Pet
       to_front("Attention! Minion wants to sleep! Mood gets worse.", false, true)
     end
 
-    # wc
     if @wc >= 8
       to_front("Attention! Minion wants to go to the toilet!", false, true)
       to_front("#{@name}: STUPA! PEE-PEE!")
@@ -262,14 +259,12 @@ class Pet
       @emoji = "&#x1F4A9;"
     end
 
-    # mood
     if @mood <= 3
       to_front("Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.", false, true)
       to_front("#{@name}: PAPOY..")
       @emoji = "&#x1F61E;"
     end
 
-    # poo-poo
     if @poo_poo > 3
       to_front("Attention! It is too dirty. Please clean around", false, true)
       @mood -= 1
@@ -279,7 +274,6 @@ class Pet
       to_front("#{@name} is sick and lost one life, #{@life} left", false, true)
     end
 
-    # life
     if @life.zero?
       to_front("Minion has no lives left. You lost #{@name}", false, true)
       to_front("#{@name}: POOPAYE...")
@@ -403,7 +397,6 @@ puts "For colorizing text install gem colorize"
 puts "---------------------------------------------------"
 pet = Pet.new
 
-# Authorization
 authorization = ""
 until authorization == "exit" || pet.owner != ""
   puts "Enter your name:"
