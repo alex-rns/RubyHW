@@ -180,6 +180,53 @@ class Pet
     end
   end
 
+  def change_name
+    if @owner == :admin || @owner == :superadmin
+      puts "Please enter minion's name:"
+      @name = gets.chomp.capitalize
+      to_front("New minions name is #{@name}", false)
+    else
+      to_front("You have no right for this", false)
+    end
+  end
+
+  def superadmin(action)
+    if @owner == :superadmin
+      case action
+      when "kill"
+        die
+      when "reset"
+        @life = 3
+        @age = 0
+        @mood = 20
+        @hunger = 0
+        @sleep = 0
+        @wc = 0
+        @study = 0
+        @poo_poo = 0
+        @evolution = false
+      else
+        puts "Please enter minion's characteristics:"
+        print "Life: "
+        @life = gets.chomp.to_i
+        print "Age: "
+        @age = gets.chomp.to_i
+        print "Mood: "
+        @mood = gets.chomp.to_i
+        print "Hunger: "
+        @hunger = gets.chomp.to_i
+        print "Sleep: "
+        @sleep = gets.chomp.to_i
+        print "WC: "
+        @wc = gets.chomp.to_i
+        print "Study: "
+        @study = gets.chomp.to_i
+      end
+    else
+      to_front("You have no right for this", false)
+    end
+  end
+
   def status
     puts "----------------Your minion status-----------------".colorize(:cyan)
     puts @name.colorize(:light_yellow)
@@ -206,6 +253,12 @@ class Pet
     puts "9 or play"
     puts "10 or super-skill"
     puts "11 or exit"
+    puts "---------------------------------------------------"
+    puts "Admin and superadmin commands:"
+    puts "12 or change-name"
+    puts "13 or change-data"
+    puts "14 or kill-pet"
+    puts "15 or reset-data"
   end
 
   private
@@ -283,7 +336,6 @@ class Pet
       exit
     end
 
-    # parameter limit
     @mood = 0 if @mood.negative?
     @mood = 20 if @mood > 20
     @sleep = 10 if @sleep > 10
@@ -368,10 +420,8 @@ class Pet
 
   def game3
     to_front("Game 'Roll the Dice'", false)
-
     to_front("#{@name} roll the dice", false)
     to_front("#{@name}: HANA, DUL, SAE")
-
     to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}. Press ENTER to roll the dice", false)
     gets
     to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}", false)
@@ -459,12 +509,19 @@ until command == "exit"
 </main>
 <footer>
   <p>List of available commands:</p>
-  <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach, 8 - clean, 9 - play, 10 - super-skill, 11 - exit</p>
-</footer>
-<script>
-  setInterval(()=>{window.location.reload()}, 1000)
-</script>
-"
+  <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach, 8 - clean, 9 - play, 10 - super-skill, 11 - exit" +
+    if pet.owner == :admin
+      ", 12 - change-name"
+    elsif pet.owner == :superadmin
+      ", 12 - change-name, 13 - change-data, 14 - kill-pet, 15 - reset-data"
+    else ""
+    end +
+    "</p>
+    </footer>
+    <script>
+      setInterval(()=>{window.location.reload()}, 1000)
+    </script>
+    "
   DisplayContent.display_content(content, true)
   puts "Please input command or type help:"
   command = gets.chomp.strip
@@ -491,6 +548,14 @@ until command == "exit"
     pet.super_skill
   when "exit", "11"
     exit
+  when "change-name", "12"
+    pet.change_name
+  when "change-data", "13"
+    pet.superadmin("change_data")
+  when "kill-pet", "14"
+    pet.superadmin("kill")
+  when "reset-data", "15"
+    pet.superadmin("reset")
   else
     puts "#{command} unknown command. To get list of commands type help"
   end
