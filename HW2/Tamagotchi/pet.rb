@@ -2,12 +2,32 @@
 
 require "colorize"
 require "display_content"
+require "yaml"
 
-ROLE = {
-  superadmin: "12345",
-  admin: "1234",
-  user: "123"
-}
+USERDATA = [
+  {
+    name: 'qwe',
+    pass: 'qwe',
+    role: 'user'
+  },
+  {
+    name: 'asd',
+    pass: 'asd',
+    role: 'user'
+  },
+  {
+    name: 'admin',
+    pass: '123',
+    role: 'admin'
+  },
+  {
+    name: 'super',
+    pass: '12345',
+    role: 'superadmin'
+  },
+]
+
+
 
 # class Pet creates a pet for game
 class Pet
@@ -181,7 +201,7 @@ class Pet
   end
 
   def change_name
-    if @owner == :admin || @owner == :superadmin
+    if @owner == "admin" || @owner == "superadmin"
       puts "Please enter minion's name:"
       @name = gets.chomp.capitalize
       to_front("New minions name is #{@name}", false)
@@ -191,7 +211,7 @@ class Pet
   end
 
   def superadmin(action)
-    if @owner == :superadmin
+    if @owner == "superadmin"
       case action
       when "kill"
         die
@@ -458,11 +478,24 @@ until authorization == "exit" || pet.owner != ""
   puts "Enter your password:"
   login_pass = gets.chomp
 
-  user = ROLE.find { |key, value| key.to_s == login_name && value == login_pass }
+  user = USERDATA.find {|f| f[:name] == login_name && f[:pass] == login_pass}
   if user.nil?
     puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
   else
-    pet.owner = user[0]
+    pet.owner = user[:role]
+    save_data = { title: "Tamagotchi Minion",
+                  characteristics: [ { life: pet.life,
+                                       age: pet.age,
+                                       mood: pet.mood,
+                                       hunger: pet.hunger,
+                                       sleep: pet.sleep,
+                                       wc: pet.wc,
+                                       study: pet.study,
+                                       poo_poo: pet.poo_poo,
+                                       evolution: pet.evolution}],
+                  user: user  }
+
+    File.open("user.yml", "w") { |file| file.write(save_data.to_yaml)}
     puts "You logged in as #{pet.owner}"
   end
 end
@@ -472,7 +505,6 @@ puts "Welcome to the tamagotchi game, #{pet.owner}! Your pet is a minion."
 puts "Please enter minion's name:"
 pet.name = gets.chomp.strip.capitalize
 pet.welcome
-p pet.owner
 
 command = ""
 until command == "exit"
@@ -510,9 +542,9 @@ until command == "exit"
 <footer>
   <p>List of available commands:</p>
   <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach, 8 - clean, 9 - play, 10 - super-skill, 11 - exit" +
-    if pet.owner == :admin
+    if pet.owner == "admin"
       ", 12 - change-name"
-    elsif pet.owner == :superadmin
+    elsif pet.owner == "superadmin"
       ", 12 - change-name, 13 - change-data, 14 - kill-pet, 15 - reset-data"
     else ""
     end +

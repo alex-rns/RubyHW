@@ -1,0 +1,16 @@
+---
+:title: Tamagotchi Minion
+:characteristics:
+- :life: 3
+  :age: 0
+  :mood: 20
+  :hunger: 0
+  :sleep: 0
+  :wc: 0
+  :study: 0
+  :poo_poo: 0
+  :evolution: false
+:user:
+  :name: super
+  :pass: '12345'
+  :role: superadmin
