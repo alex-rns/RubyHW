@@ -6,32 +6,31 @@ require "yaml"
 
 USERDATA = [
   {
-    name: 'qwe',
-    pass: 'qwe',
-    role: 'user'
+    name: "qwe",
+    pass: "qwe",
+    role: "user"
   },
   {
-    name: 'asd',
-    pass: 'asd',
-    role: 'user'
+    name: "asd",
+    pass: "asd",
+    role: "user"
   },
   {
-    name: 'admin',
-    pass: '123',
-    role: 'admin'
+    name: "admin",
+    pass: "123",
+    role: "admin"
   },
   {
-    name: 'super',
-    pass: '12345',
-    role: 'superadmin'
-  },
+    name: "super",
+    pass: "12345",
+    role: "superadmin"
+  }
 ]
-
-
 
 # class Pet creates a pet for game
 class Pet
-  attr_accessor :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase, :attention_phrase, :emoji, :owner
+  attr_accessor :name, :life, :age, :mood, :hunger, :sleep, :wc, :study, :poo_poo, :evolution, :minion_phrase, :phrase,
+    :attention_phrase, :emoji, :owner
 
   def initialize(name = "Stuart")
     @name = name
@@ -131,7 +130,8 @@ class Pet
 
   def walk_check
     if @hunger >= 6
-      to_front("Attention! The walk will take a long time. Recommended to feed minion before walk. Input 1 for walk or 2 for feed minion.", false, true)
+      to_front("Attention! The walk will take a long time. Recommended to feed minion before walk.
+ Input 1 for walk or 2 for feed minion.", false, true)
       walk_choice = gets.chomp.strip
       case walk_choice
       when "1"
@@ -167,7 +167,8 @@ class Pet
   end
 
   def play
-    to_front("Enter number of game if you want to play: 1 - Guess Number, 2 - Slot Machine, 3 - Roll The Dice, 4 - exit game list", false)
+    to_front("Enter number of game if you want to play: 1 - Guess Number, 2 - Slot Machine, 3 - Roll The Dice,
+ 4 - exit game list", false)
     game = gets.chomp.strip
     case game
     when "1"
@@ -335,7 +336,8 @@ class Pet
     end
 
     if @mood <= 3
-      to_front("Attention! Minion is in no mood. Learning gets harder. Play with him or take for a walk.", false, true)
+      to_front("Attention! Minion is in no mood. Learning gets harder.
+ Play with him or take for a walk.", false, true)
       to_front("#{@name}: PAPOY..")
       @emoji = "&#x1F61E;"
     end
@@ -411,7 +413,8 @@ class Pet
   def game2
     to_front("Game 'Slot Machine'", false)
     to_front("Minion has 30 dollars. One game on a slot machine costs 50 cent.", false)
-    win_variant = {"700" => 10, "710" => 20, "720" => 30, "730" => 40, "740" => 50, "750" => 60, "760" => 70, "770" => 80, "777" => 10_000}
+    win_variant = {"700" => 10, "710" => 20, "720" => 30, "730" => 40, "740" => 50,
+                   "750" => 60, "760" => 70, "770" => 80, "777" => 10_000}
     money = 30
     input = ""
     until input == "stop"
@@ -442,7 +445,8 @@ class Pet
     to_front("Game 'Roll the Dice'", false)
     to_front("#{@name} roll the dice", false)
     to_front("#{@name}: HANA, DUL, SAE")
-    to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}. Press ENTER to roll the dice", false)
+    to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}.
+ Press ENTER to roll the dice", false)
     gets
     to_front("First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}", false)
 
@@ -478,24 +482,24 @@ until authorization == "exit" || pet.owner != ""
   puts "Enter your password:"
   login_pass = gets.chomp
 
-  user = USERDATA.find {|f| f[:name] == login_name && f[:pass] == login_pass}
+  user = USERDATA.find { |f| f[:name] == login_name && f[:pass] == login_pass }
   if user.nil?
     puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
   else
     pet.owner = user[:role]
-    save_data = { title: "Tamagotchi Minion",
-                  characteristics: [ { life: pet.life,
-                                       age: pet.age,
-                                       mood: pet.mood,
-                                       hunger: pet.hunger,
-                                       sleep: pet.sleep,
-                                       wc: pet.wc,
-                                       study: pet.study,
-                                       poo_poo: pet.poo_poo,
-                                       evolution: pet.evolution}],
-                  user: user  }
+    save_data = {title: "Tamagotchi Minion",
+                 characteristics: [{life: pet.life,
+                                    age: pet.age,
+                                    mood: pet.mood,
+                                    hunger: pet.hunger,
+                                    sleep: pet.sleep,
+                                    wc: pet.wc,
+                                    study: pet.study,
+                                    poo_poo: pet.poo_poo,
+                                    evolution: pet.evolution}],
+                 user: user}
 
-    File.open("user.yml", "w") { |file| file.write(save_data.to_yaml)}
+    File.open("user.yml", "w") { |file| file.write(save_data.to_yaml) }
     puts "You logged in as #{pet.owner}"
   end
 end
@@ -541,7 +545,8 @@ until command == "exit"
 </main>
 <footer>
   <p>List of available commands:</p>
-  <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach, 8 - clean, 9 - play, 10 - super-skill, 11 - exit" +
+  <p> 1 - help, 2 - status, 3 - feed, 4 - sleep, 5 - wc, 6 - walk, 7 - teach,
+ 8 - clean, 9 - play, 10 - super-skill, 11 - exit" +
     if pet.owner == "admin"
       ", 12 - change-name"
     elsif pet.owner == "superadmin"
