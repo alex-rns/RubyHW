@@ -451,7 +451,7 @@ puts "For colorizing text install gem colorize"
 puts "---------------------------------------------------"
 pet = Pet.new
 
-authorization(pet)
+Authorization.authorization(pet)
 role = YAML.load_file("user.yml")
 pet.owner = role[:user][:role]
 
