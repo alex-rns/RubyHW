@@ -1,4 +1,4 @@
-require 'yaml'
+require "yaml"
 
 USERDATA = [
   {
@@ -23,10 +23,9 @@ USERDATA = [
   }
 ]
 
-def authorization
-  role = ''
+def authorization(pet)
   authorization = ""
-  until authorization == "exit" || role != ""
+  until authorization == "exit" || pet.owner != ""
     puts "Please enter your username and password to start"
     puts "Enter your name:"
     login_name = gets.chomp
@@ -38,21 +37,21 @@ def authorization
     if user.nil?
       puts "Wrong name or password. Input correct data or enter 'exit' to leave program"
     else
-      role = user[:role]
-      save_data = { title: "Tamagotchi Minion",
-                    # characteristics: [{life: pet.life,
-                    #                    age: pet.age,
-                    #                    mood: pet.mood,
-                    #                    hunger: pet.hunger,
-                    #                    sleep: pet.sleep,
-                    #                    wc: pet.wc,
-                    #                    study: pet.study,
-                    #                    poo_poo: pet.poo_poo,
-                    #                    evolution: pet.evolution}],
-                    user: user }
+      pet.owner = user[:role]
+      save_data = {title: "Tamagotchi Minion",
+                   characteristics: [{life: pet.life,
+                                      age: pet.age,
+                                      mood: pet.mood,
+                                      hunger: pet.hunger,
+                                      sleep: pet.sleep,
+                                      wc: pet.wc,
+                                      study: pet.study,
+                                      poo_poo: pet.poo_poo,
+                                      evolution: pet.evolution}],
+                   user: user}
 
       File.open("user.yml", "w") { |file| file.write(save_data.to_yaml) }
-      puts "You logged in as #{role}"
+      puts "You logged in as #{pet.owner}"
     end
   end
 end

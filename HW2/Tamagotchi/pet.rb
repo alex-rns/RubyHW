@@ -3,30 +3,7 @@
 require "colorize"
 require "display_content"
 require "yaml"
-require_relative 'authorization'
-#
-# USERDATA = [
-#   {
-#     name: "qwe",
-#     pass: "qwe",
-#     role: "user"
-#   },
-#   {
-#     name: "asd",
-#     pass: "asd",
-#     role: "user"
-#   },
-#   {
-#     name: "admin",
-#     pass: "123",
-#     role: "admin"
-#   },
-#   {
-#     name: "super",
-#     pass: "12345",
-#     role: "superadmin"
-#   }
-# ]
+require_relative "authorization"
 
 # class Pet creates a pet for game
 class Pet
@@ -474,10 +451,9 @@ puts "For colorizing text install gem colorize"
 puts "---------------------------------------------------"
 pet = Pet.new
 
-authorization
-role = YAML.load_file('user.yml')
+authorization(pet)
+role = YAML.load_file("user.yml")
 pet.owner = role[:user][:role]
-p pet.owner
 
 puts "---------------------------------------------------"
 puts "Welcome to the tamagotchi game, #{pet.owner}! Your pet is a minion."
