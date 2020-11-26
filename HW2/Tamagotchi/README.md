@@ -54,9 +54,12 @@ To install "display_content" ```cd display_content``` and
 ## How to start playing
 
 - Go```$ cd HW2/Tamagotchi ``` and run ```pet.rb```
-- Enter the name of you pet.
 - If you have installed the "display_content" gem run ```index.html```, that was created in folder.
-
+- Create new user or log into one of the existing: 
+  - **as user**:  name: "qwe" - pass: "qwe";
+  - **as admin:**  name: "admin" - pass: "123";
+  - **as superadmin**: name: "super" - pass: "12345"
+- Enter the name of you pet.
 
 ## Specification
 
