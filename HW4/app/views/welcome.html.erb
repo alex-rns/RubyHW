@@ -6,15 +6,25 @@
   <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
-<form class="form-inline" action="/welcome" method="get">
-  <label for="name">Enter name for your pet: </label>
-
-  <div class="form-group mx-sm-3">
-    <label for="name" class="sr-only">Name</label>
-    <input type="text" name="name" class="form-control" id="" placeholder="Name">
+  <div class="login-box">
+    <h2>welcome</h2>
+    <form class="form-inline" action="/welcome" method="get">
+      <div class="user-box">
+        <input type="text" name="pet_name" required="">
+        <label>Pet name</label>
+      </div>
+<!--      <div class="user-box">-->
+<!--        <input type="password" name="" required="">-->
+<!--        <label>Password</label>-->
+<!--      </div>-->
+      <button type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
   </div>
-
-  <button type="submit" class="btn btn-primary" value="Start">Start</button>
-</form>
 </body>
 </html>

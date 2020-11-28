@@ -11,15 +11,18 @@ class Pet
 
   def initialize(env)
     @request = Rack::Request.new(env)
-    @name = "Stuart"
     @life = 3
     @age = 0
-    @mood = 20
+    @mood = 100
     @hunger = 0
     @sleep = 0
     @wc = 0
     @study = 0
     @poo_poo = 0
+    @emoji = "&#x1F92A;"
+    @text = "Minion #{@request.params['pet_name']} came to you!"
+    @minion_txt = "BELLO!"
+    @warning_txt = "BELLO!"
   end
 
   def response
@@ -28,17 +31,30 @@ class Pet
       Rack::Response.new(render("welcome.html.erb"))
     when "/welcome"
       Rack::Response.new do |response|
+        response.set_cookie('pet_name', @request.params['pet_name'].capitalize)
         response.set_cookie('life', @life)
         response.set_cookie('age', @age)
         response.set_cookie('mood', @mood)
         response.set_cookie('hunger', @hunger)
+        response.set_cookie('wc', @wc)
+        response.set_cookie('emoji', @emoji)
+        response.set_cookie('text', @text)
+        response.set_cookie('minion_txt', @minion_txt)
         response.redirect('/start')
       end
     when "/start"
       Rack::Response.new(render("index.html.erb"))
-    when '/change'
-      return Logic.feed(@request) if @request.params['feed']
-      # return Logic.passed_time(@request) if @request.params['feed']
+    when '/action_of_button'
+      return Logic.feed(
+        @request,
+        "&#x1F924;",
+        "You give #{@request.cookies["pet_name"]} his favorite food",
+        "BA-NA-NA!") if @request.params['feed']
+      return Logic.go_sleep(
+        @request,
+        "&#x1F634;",
+        "You put #{@request.cookies["pet_name"]} to bed.",
+        "MUAK MUAK MUAK!") if @request.params['sleep']
     else
       Rack::Response.new('Not Found', 404)
     end
@@ -50,6 +66,6 @@ class Pet
   end
 
   def get(attr)
-    @request.cookies["#{attr}"].to_i
+    @request.cookies["#{attr}"]
   end
 end

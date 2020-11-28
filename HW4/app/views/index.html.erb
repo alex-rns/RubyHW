@@ -7,37 +7,40 @@
 </head>
 <body>
 <header>
-<!--  <span><%#= name %></span>-->
-  <span>#{pet.attention_phrase}</span>
+  <span><%= get('pet_name')  %></span>
+  <span><%= get('warning_txt')  %></span>
 </header>
 <main>
   <section>
     <ul>
-      <li>Life: <strong><%= get('life')  %></strong></li>
-      <li>Age: <strong><%= get('age')  %></strong></li>
-      <li>Mood: <strong><%= get('mood')*5  %>%</strong></li>
-      <li>Hunger: <strong><%= get('hunger') *10 %>%</strong></li>
-<!--      <li>Sleep: <strong>#{pet.sleep * 5}%</strong></li>-->
-<!--      <li>WC: <strong>#{pet.wc * 10}%</strong></li>-->
-<!--      <li>Study: <strong>#{pet.study}</strong></li>-->
+      <li>Life: <strong><%= get('life') %></strong></li>
+      <li>Age: <strong><%= get('age') %></strong></li>
+      <li>Mood: <strong><%= get('mood') %>%</strong></li>
+      <li>Hunger: <strong><%= get('hunger') %>%</strong></li>
+      <li>Sleep: <strong><%= get('sleep') %>%</strong></li>
+      <li>WC: <strong><%= get('wc') %>%</strong></li>
+      <li>Study: <strong><%= get('study') %></strong></li>
     </ul>
   </section>
 
   <article>
     <div>
-      <p>#{pet.phrase}</p>
+      <p><%= get('text') %></p>
     </div>
     <div>
-      <p>#{pet.minion_phrase}</p>
+      <p><%= get('minion_txt') %></p>
     </div>
   </article>
   <aside>
-    <p>#{pet.emoji}</p>
+    <p><%= get('emoji') %></p>
   </aside>
 </main>
 <footer>
-  <form action="/change" method="get">
-    <button type="submit" class="btn btn-outline-info" name="feed" value="feed">Feed</button>
+  <form action="/action_of_button" method="get">
+    <button type="submit" class="btn btn-outline-info" name="feed" value="feed">
+      <span></span><span></span><span></span><span></span>Feed</button>
+    <button type="submit" class="btn btn-outline-info" name="sleep" value="sleep">
+      <span></span><span></span><span></span><span></span>Sleep</button>
   </form>
 </footer>
 </body>
