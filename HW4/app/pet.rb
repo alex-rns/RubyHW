@@ -36,6 +36,8 @@ class Pet
         response.set_cookie('mood', @mood)
         response.set_cookie('hunger', @hunger)
         response.set_cookie('wc', @wc)
+        response.set_cookie('sleep', @sleep)
+        response.set_cookie('poo_poo', @poo_poo)
         response.set_cookie('emoji', @emoji)
         response.set_cookie('text', @text)
         response.set_cookie('minion_txt', @minion_txt)
@@ -60,6 +62,11 @@ class Pet
         "&#x1F92B;",
         "Minion goes to the toilet",
         "PWEDE NA?") if @request.params['wc']
+      return Logic.go_walk(
+        @request,
+        "&#x1F601;",
+        "You go for a walk with #{@request.cookies["pet_name"]}",
+        "KAMPAI!") if @request.params['walk']
     else
       Rack::Response.new('Not Found', 404)
     end
