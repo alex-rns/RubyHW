@@ -55,6 +55,7 @@ module Logic
       end
       self.remove_attention(request, response, "Attention! Minion wants to go to the toilet!", "wc", 70 )
       self.remove_attention(request, response, "Your minion went to the toilet in jeans", "wc", 90 )
+      self.remove_attention(request, response, "#{request.cookies["pet_name"]} lost one life", "age", 1 )
 
       if request.cookies["mood"].to_i <= 20
         response.set_cookie("warning_txt", "Attention! Minion is in no mood. Learning gets harder.
@@ -70,7 +71,15 @@ module Logic
       response.set_cookie("mood", 100) if request.cookies["mood"].to_i > 100
       response.set_cookie("sleep", 100) if request.cookies["sleep"].to_i > 100
 
-      response.redirect('/start')
+      if request.cookies["life"].to_i.zero?
+        response.set_cookie("warning_txt", "Minion has no lives left")
+        response.set_cookie("text", "You lost #{request.cookies["pet_name"]}")
+        response.set_cookie("minion_txt", "POOPAYE...")
+        response.set_cookie("emoji", "&#x2620;")
+        response.redirect('/game-over')
+      end
+
+        response.redirect('/start')
     end
   end
 
@@ -128,25 +137,6 @@ module Logic
       end
       self.passed_time(request, emoji, text, minion_txt)
     end
-    # Rack::Response.new do |response|
-    #   if request.cookies["hunger"].to_i >= 45
-    #     response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
-    #   end
-    #   if request.cookies["hunger"].to_i >= 45
-    #     response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
-    #   end
-    #   if request.cookies["mood"].to_i <= 80
-    #     response.set_cookie("mood", request.cookies["mood"].to_i + 20)
-    #   end
-    #   response.set_cookie("wc", request.cookies["wc"] = 0)
-    #   response.set_cookie("hunger", request.cookies["hunger"].to_i + rand(10..20))
-    #   response.set_cookie("minion_txt", minion_txt)
-    #   response.set_cookie("text", text)
-    #   response.set_cookie("emoji", emoji)
-    #
-    #   self.passed_time(request, emoji, text, minion_txt)
-    #   response.redirect('/start')
-    # end
   end
 
   def self.die(request, response)

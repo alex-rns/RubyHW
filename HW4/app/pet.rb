@@ -46,6 +46,8 @@ class Pet
       end
     when "/start"
       Rack::Response.new(render("index.html.erb"))
+    when "/game-over"
+      Rack::Response.new(render("game-over.html.erb"))
     when '/action_of_button'
       return Logic.feed(
         @request,
