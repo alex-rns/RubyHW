@@ -17,9 +17,9 @@ module Logic
         response.set_cookie("emoji", "&#x1F34C;")
       end
       if request.cookies["hunger"].to_i >= 100
-        self.die(request, response)
-        response.set_cookie("warning_txt", "You did not feed your minion. #{request.cookies["pet_name"]} lost one life, #{request.cookies["life"].to_i - 1} left")
+        response.set_cookie("text", "You did not feed your minion")
         response.set_cookie("minion_txt", "TATATA BALA TU!!")
+        self.die(request, response)
       end
       self.remove_attention(request, response, "Attention! Feed your minion!", "hunger", 80 )
       self.remove_attention(request, response, "Attention! Feed your minion before walk!", "hunger", 65 )
@@ -112,21 +112,41 @@ module Logic
   end
 
   def self.go_walk(request, emoji, text, minion_txt)
-    Rack::Response.new do |response|
-      if request.cookies["hunger"].to_i >= 45
+    if request.cookies["hunger"].to_i >= 70
+      Rack::Response.new do |response|
         response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
+        response.redirect('/start')
+      end
+    else
+      Rack::Response.new do |response|
+        response.set_cookie("mood", request.cookies["mood"] = rand(80..105))
+        response.set_cookie("wc", request.cookies["wc"] = -10)
+        response.set_cookie("hunger", request.cookies["hunger"] = rand(70..90))
+        response.set_cookie("text", text)
+        response.set_cookie("minion_txt", minion_txt)
+        response.set_cookie("emoji", emoji)
       end
       self.passed_time(request, emoji, text, minion_txt)
-      if request.cookies["mood"].to_i <= 80
-        response.set_cookie("mood", request.cookies["mood"].to_i + 20)
-      end
-      response.set_cookie("wc", request.cookies["wc"] = 0)
-      response.set_cookie("hunger", request.cookies["hunger"].to_i + rand(10..20))
-      response.set_cookie("minion_txt", minion_txt)
-      response.set_cookie("text", text)
-      response.set_cookie("emoji", emoji)
-      response.redirect('/start')
     end
+    # Rack::Response.new do |response|
+    #   if request.cookies["hunger"].to_i >= 45
+    #     response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
+    #   end
+    #   if request.cookies["hunger"].to_i >= 45
+    #     response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
+    #   end
+    #   if request.cookies["mood"].to_i <= 80
+    #     response.set_cookie("mood", request.cookies["mood"].to_i + 20)
+    #   end
+    #   response.set_cookie("wc", request.cookies["wc"] = 0)
+    #   response.set_cookie("hunger", request.cookies["hunger"].to_i + rand(10..20))
+    #   response.set_cookie("minion_txt", minion_txt)
+    #   response.set_cookie("text", text)
+    #   response.set_cookie("emoji", emoji)
+    #
+    #   self.passed_time(request, emoji, text, minion_txt)
+    #   response.redirect('/start')
+    # end
   end
 
   def self.die(request, response)
@@ -137,5 +157,6 @@ module Logic
       response.set_cookie("mood", 100)
       response.set_cookie("wc", 0)
       response.set_cookie("sleep", 0)
+      response.set_cookie("warning_txt", "#{request.cookies["pet_name"]} lost one life, #{request.cookies["life"].to_i - 1} left")
   end
 end
