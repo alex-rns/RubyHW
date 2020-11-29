@@ -22,7 +22,6 @@ class Pet
     @emoji = "&#x1F92A;"
     @text = "Minion #{@request.params['pet_name']} came to you!"
     @minion_txt = "BELLO!"
-    @warning_txt = "BELLO!"
   end
 
   def response
@@ -40,6 +39,7 @@ class Pet
         response.set_cookie('emoji', @emoji)
         response.set_cookie('text', @text)
         response.set_cookie('minion_txt', @minion_txt)
+        response.set_cookie('warning_txt', "")
         response.redirect('/start')
       end
     when "/start"
@@ -53,8 +53,13 @@ class Pet
       return Logic.go_sleep(
         @request,
         "&#x1F634;",
-        "You put #{@request.cookies["pet_name"]} to bed.",
+        "You put #{@request.cookies["pet_name"]} to bed",
         "MUAK MUAK MUAK!") if @request.params['sleep']
+      return Logic.go_wc(
+        @request,
+        "&#x1F92B;",
+        "Minion goes to the toilet",
+        "PWEDE NA?") if @request.params['wc']
     else
       Rack::Response.new('Not Found', 404)
     end

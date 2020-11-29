@@ -10,7 +10,9 @@ body {
   text-align: center;
   font-size: 35px;
   padding:0;
-  font-family: sans-serif;}
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55); }
+
 
 header {
   color: #03e9f4;;
@@ -21,6 +23,9 @@ header {
   text-align: center;
   font-weight: bold;
   background: linear-gradient(#141e30, #243b55); }
+header span:first-child {
+  letter-spacing: 4px;
+  text-transform: uppercase}
 header span:last-child {
   color: #b80000; }
 
@@ -138,11 +143,11 @@ footer form button{
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
-  transition: .5s;
   margin-top: 40px;
   letter-spacing: 4px;
   background-color: inherit;
   border-style: none;
+  outline: none;
 }
 
 .login-box button:hover,
