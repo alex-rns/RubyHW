@@ -19,6 +19,7 @@ class Pet
     @wc = 0
     @study = 0
     @poo_poo = 0
+    @evolution = 0
     @emoji = "&#x1F92A;"
     @text = "Minion #{@request.params['pet_name']} came to you!"
     @minion_txt = "BELLO!"
@@ -37,7 +38,9 @@ class Pet
         response.set_cookie('hunger', @hunger)
         response.set_cookie('wc', @wc)
         response.set_cookie('sleep', @sleep)
+        response.set_cookie('study', @study)
         response.set_cookie('poo_poo', @poo_poo)
+        response.set_cookie('evolution', @evolution)
         response.set_cookie('emoji', @emoji)
         response.set_cookie('text', @text)
         response.set_cookie('minion_txt', @minion_txt)
@@ -69,6 +72,21 @@ class Pet
         "&#x1F601;",
         "You go for a walk with #{@request.cookies["pet_name"]}",
         "KAMPAI!") if @request.params['walk']
+      return Logic.clean_up(
+        @request,
+        "&#x1F644;",
+        "We cleaned up around",
+        "GELATO!") if @request.params['clean']
+      return Logic.teach(
+        @request,
+        "&#x1F913;",
+        "You minion is learning Ruby",
+        "WOW! BOBMA!") if @request.params['teach']
+      return Logic.super_skill(
+        @request,
+        "&#x1F92F;",
+        "All parameters are restored!",
+        "BEE DO BEE DO BEE DO!") if @request.params['super']
     else
       Rack::Response.new('Not Found', 404)
     end

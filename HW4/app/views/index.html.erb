@@ -33,6 +33,9 @@
   </article>
   <aside>
     <p><%= get('emoji') %></p>
+    <div>
+      <%="&#x1F4A9;" * get('poo_poo').to_i %>
+    </div>
   </aside>
 </main>
 <footer>
@@ -45,6 +48,12 @@
       <span></span><span></span><span></span><span></span>WC</button>
     <button type="submit" name="walk" value="walk">
       <span></span><span></span><span></span><span></span>Walk</button>
+    <button type="submit" name="clean" value="clean">
+      <span></span><span></span><span></span><span></span>Clean</button>
+    <button type="submit" name="teach" value="teach">
+      <span></span><span></span><span></span><span></span>Teach</button>
+    <button type="submit" name="super" value="super">
+      <span></span><span></span><span></span><span></span>Super skill</button>
   </form>
 </footer>
 </body>
