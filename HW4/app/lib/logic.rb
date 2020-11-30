@@ -209,6 +209,16 @@ module Logic
     end
   end
 
+  def self.guess_number(request, emoji, text, minion_txt)
+    Rack::Response.new do |response|
+      response.set_cookie("text", text)
+      response.set_cookie("minion_txt", minion_txt)
+      response.set_cookie("emoji", emoji)
+      response.set_cookie("warning_txt", request.params["guess_number"])
+      response.redirect('/guess-number')
+    end
+  end
+
   def self.die(request, response)
       response.set_cookie("life", request.cookies["life"].to_i - 1)
       response.set_cookie("emoji", "&#x1F631;")

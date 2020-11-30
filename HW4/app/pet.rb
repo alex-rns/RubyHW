@@ -49,6 +49,8 @@ class Pet
       end
     when "/start"
       Rack::Response.new(render("index.html.erb"))
+    when "/guess-number"
+      Rack::Response.new(render("game-guess-number.html.erb"))
     when "/game-over"
       Rack::Response.new(render("game-over.html.erb"))
     when '/action_of_button'
@@ -85,8 +87,22 @@ class Pet
       return Logic.super_skill(
         @request,
         "&#x1F92F;",
-        "All parameters are restored!",
+      "All parameters are restored!",
         "BEE DO BEE DO BEE DO!") if @request.params['super']
+      return Rack::Response.new(render("mini-game-choose.html.erb")) if @request.params['play']
+    when '/mini-game'
+      return Rack::Response.new(render("game-guess-number.html.erb")) if @request.params['guess']
+      return Rack::Response.new(render("index.html.erb")) if @request.params['exit']
+    when '/guess'
+      # Rack::Response.new do |response|
+      #   response.set_cookie('guess_number', @request.params['guess_number'])
+      #   response.redirect('/guess-number')
+      # end
+      return Logic.guess_number(
+        @request,
+        "&#x1F9D0;",
+        "The minion thought of a number from 1 to 100, guess the number",
+        "HANA!") if @request.params['guess_number']
     else
       Rack::Response.new('Not Found', 404)
     end

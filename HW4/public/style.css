@@ -85,6 +85,10 @@ body {
   background: url(/public/welcome-minion.jpg) no-repeat center center fixed;
   background-size: 100%;
 }
+.input-form form {
+  display: flex;
+}
+
 
 .login-box {
   position: absolute;
@@ -106,11 +110,13 @@ body {
   text-align: center;
 }
 
-.login-box .user-box {
+.login-box .user-box,
+.input-form .user-box{
   position: relative;
 }
 
-.login-box .user-box input {
+.login-box .user-box input,
+.input-form .user-box input{
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
@@ -121,7 +127,8 @@ body {
   outline: none;
   background: transparent;
 }
-.login-box .user-box label {
+.login-box .user-box label,
+.input-form .user-box label{
   position: absolute;
   top:0;
   left: 0;
@@ -133,7 +140,9 @@ body {
 }
 
 .login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:valid ~ label,
+.input-form .user-box input:focus ~ label,
+.input-form .user-box input:valid ~ label{
   top: -20px;
   left: 0;
   color: #03e9f4;
@@ -206,7 +215,9 @@ footer button span:nth-child(2) {
   animation: btn-anim2 1s linear infinite;
   animation-delay: .25s
 }
-
+footer form button {
+  margin: 0;
+}
 @keyframes btn-anim2 {
   0% {
     top: -100%;
@@ -254,6 +265,7 @@ footer button span:nth-child(4){
   50%,100% {
     bottom: 100%;
   }
+
 }
 
 /*# sourceMappingURL=style.css.map */
