@@ -127,6 +127,11 @@ body {
   outline: none;
   background: transparent;
 }
+
+.input-form .user-box input {
+  margin-bottom: 0;
+}
+
 .login-box .user-box label,
 .input-form .user-box label{
   position: absolute;

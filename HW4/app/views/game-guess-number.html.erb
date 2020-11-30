@@ -40,15 +40,19 @@
 </main>
 <footer>
   <div class="input-form">
-    <form action="/guess" method="get">
+    <form action="/guess-start" method="get">
       <div class="user-box">
-        <input type="text" name="guess_number">
+        <input type="text" name="guess_number_value" required>
         <label>Input number</label>
       </div>
       <button type="submit">
         <span></span><span></span><span></span><span></span>Start</button>
-<!--      <button type="submit" name="exit" value="exit">-->
-<!--        <span></span><span></span><span></span><span></span>Exit</button>-->
+    </form>
+  </div>
+  <div class="input-form">
+    <form action="/start" method="get">
+      <button type="submit" name="exit" value="exit">
+        <span></span><span></span><span></span><span></span>Exit</button>
     </form>
   </div>
 </footer>
