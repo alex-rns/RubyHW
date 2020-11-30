@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tamagotchi minion</title>
+  <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+<header>
+  <span><%= get('pet_name')  %></span>
+  <span><%= get('warning_txt')  %></span>
+</header>
+<main>
+  <section>
+    <ul>
+      <li>Life: <strong><%= get('life') %></strong></li>
+      <li>Age: <strong><%= get('age') %></strong></li>
+      <li>Mood: <strong><%= get('mood') %>%</strong></li>
+      <li>Hunger: <strong><%= get('hunger') %>%</strong></li>
+      <li>Sleep: <strong><%= get('sleep') %>%</strong></li>
+      <li>WC: <strong><%= get('wc') %>%</strong></li>
+      <li>Study: <strong><%= get('study') %></strong></li>
+    </ul>
+  </section>
+
+  <article>
+    <div>
+      <p><%= get('text') %></p>
+    </div>
+    <div>
+      <p><%= get('minion_txt') %></p>
+    </div>
+  </article>
+  <aside>
+    <p><%= get('emoji') %></p>
+    <div>
+      <%="&#x1F4A9;" * get('poo_poo').to_i %>
+    </div>
+  </aside>
+</main>
+<footer>
+  <div class="input-form">
+    <form action="/slot-start" method="get">
+      <button type="submit" name="slot_go">
+        <span></span><span></span><span></span><span></span>Start</button>
+    </form>
+  </div>
+  <div class="input-form">
+    <form action="/start" method="get">
+      <button type="submit" name="exit" value="exit">
+        <span></span><span></span><span></span><span></span>Exit</button>
+    </form>
+  </div>
+</footer>
+</body>
+</html>

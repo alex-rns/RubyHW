@@ -208,13 +208,12 @@ module Logic
     end
   end
 
-  def self.guess_number_init(request, emoji, text, minion_txt)
+  def self.guess_number_init(emoji, text, minion_txt)
     Rack::Response.new do |response|
       response.set_cookie("text", text)
       response.set_cookie("minion_txt", minion_txt)
       response.set_cookie("emoji", emoji)
       response.set_cookie("guess_number", rand(1..100))
-      response.set_cookie("warning_txt", request.params["guess_number_value"])
       response.redirect("/guess-number")
     end
   end
@@ -240,6 +239,46 @@ module Logic
       response.redirect("/guess-number")
     end
   end
+
+  def self.slot_machine_init(request, emoji, text, minion_txt)
+    Rack::Response.new do |response|
+      response.set_cookie("text", text)
+      response.set_cookie("minion_txt", minion_txt)
+      response.set_cookie("emoji", emoji)
+      response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"] || 30)
+      # response.set_cookie("warning_txt", request.params["slot_machine_value"])
+      response.redirect("/slot-machine")
+    end
+  end
+
+  def self.slot_machine_game(request)
+    win_variant = {"700" => 10, "710" => 20, "720" => 30, "730" => 40, "740" => 50,
+                   "750" => 60, "760" => 70, "770" => 80, "777" => 10_000}
+    random = rand(700..780).to_s
+    Rack::Response.new do |response|
+      if win_variant[random]
+        response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i + win_variant[random])
+        response.set_cookie("mood", request.cookies["mood"] = 100)
+        response.set_cookie("text", "#{request.cookies["pet_name"]} win #{win_variant[random]} dollars.")
+        response.set_cookie("minion_txt", "BEE DO BEE DO BEE DO!")
+        response.set_cookie("emoji", "&#x1F609;")
+      elsif request.cookies["slot_machine_money"].to_i <= 0
+        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i - 40)
+        response.set_cookie("text", "#{request.cookies["pet_name"]} lost all the money")
+        response.delete_cookie("slot_machine_money")
+        response.set_cookie("minion_txt", "SA LA KA!")
+        response.set_cookie("emoji", "&#x1F643;")
+      else
+        response.set_cookie("text", "Minion lost 1 dollar.")
+        response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i - 1)
+
+      end
+      response.set_cookie("warning_txt", "Combination: #{random}. Minion balance is #{request.cookies["slot_machine_money"].to_i + win_variant[random].to_i}")
+
+      response.redirect("/slot-machine")
+    end
+  end
+
 
   def self.die(request, response)
     response.set_cookie("life", request.cookies["life"].to_i - 1)

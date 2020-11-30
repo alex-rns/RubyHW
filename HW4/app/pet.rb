@@ -97,16 +97,25 @@ class Pet
       return Rack::Response.new(render("mini-game-choose.html.erb")) if @request.params["play"]
     when "/mini-game"
       return Logic.guess_number_init(
-        @request,
         "&#x1F9D0;",
         "The minion thought of a number from 1 to 100, guess the number",
         "HANA!"
       ) if @request.params["guess"]
+      return Logic.slot_machine_init(
+        @request,
+        "&#x1F60F;",
+        "Minion has 30 dollars. One game on a slot machine costs 1 dollar. Press START for game",
+        "HANA!"
+      ) if @request.params["slot"]
       return Rack::Response.new(render("index.html.erb")) if @request.params["exit"]
     when "/guess-number"
       Rack::Response.new(render("game-guess-number.html.erb"))
     when "/guess-start"
       return Logic.guess_number_game(@request) if @request.params["guess_number_value"]
+    when "/slot-machine"
+      Rack::Response.new(render("game-slot-machine.html.erb"))
+    when "/slot-start"
+      return Logic.slot_machine_game(@request) if @request.params["slot_go"]
     else
       Rack::Response.new("Not Found", 404)
     end
