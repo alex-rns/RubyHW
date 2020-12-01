@@ -110,7 +110,6 @@ class Pet
       return Logic.roll_dice_init(
         @request,
         "&#x1F60E;",
-        "You roll the dice in turn.",
         "HANA!"
       ) if @request.params["roll"]
       return Rack::Response.new(render("index.html.erb")) if @request.params["exit"]

@@ -280,7 +280,7 @@ module Logic
     end
   end
 
-  def self.roll_dice_init(request, emoji, text, minion_txt)
+  def self.roll_dice_init(request, emoji, minion_txt)
     Rack::Response.new do |response|
       response.set_cookie("text", "#{request.cookies["pet_name"]} roll the dice: First dice = #{a = roll},
  second dice = #{b = roll}: sum = #{minions_dices = a + b}. Press Roll to roll the dice")
@@ -326,7 +326,6 @@ module Logic
   def self.roll
     rand(1..6)
   end
-
 
   def self.die(request, response)
     response.set_cookie("life", request.cookies["life"].to_i - 1)
