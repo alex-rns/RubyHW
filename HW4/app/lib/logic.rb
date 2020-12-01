@@ -71,7 +71,7 @@ module Logic
         response.set_cookie("warning_txt", "")
       end
 
-      if request.cookies["evolution"].to_i.zero? && request.cookies["age"].to_i >= 10 && request.cookies["study"].to_i >= 5
+      if request.cookies["evolution"].to_i.zero? && request.cookies["age"].to_i >= 40 && request.cookies["study"].to_i >= 30
         response.set_cookie("text", "WOWOWOWOWOWOWOWOW!!!!!! #{request.cookies["pet_name"]} evolve into a Super#{request.cookies["pet_name"]}!")
         response.set_cookie("life", request.cookies["life"].to_i + 1)
         response.set_cookie("pet_name", "Super#{request.cookies["pet_name"]}")
@@ -274,15 +274,16 @@ module Logic
         response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i - 1)
       end
       game_mood(request, response)
-      response.set_cookie("warning_txt", "Combination: #{random}. Minion balance is #{request.cookies["slot_machine_money"].to_i + win_variant[random].to_i}")
+      response.set_cookie("warning_txt", "Combination: #{random}.
+ Minion balance is #{request.cookies["slot_machine_money"].to_i + win_variant[random].to_i}")
       response.redirect("/slot-machine")
     end
   end
 
   def self.roll_dice_init(request, emoji, text, minion_txt)
     Rack::Response.new do |response|
-      response.set_cookie("text", "#{request.cookies["pet_name"]} roll the dice: First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}.
- Press Roll to roll the dice")
+      response.set_cookie("text", "#{request.cookies["pet_name"]} roll the dice: First dice = #{a = roll},
+ second dice = #{b = roll}: sum = #{minions_dices = a + b}. Press Roll to roll the dice")
       response.set_cookie("warning_txt", "Minion dices: #{minions_dices}")
       response.set_cookie("minions_dices", minions_dices)
       response.set_cookie("minion_txt", minion_txt)
@@ -295,8 +296,8 @@ module Logic
     minions_dice = request.cookies["minions_dices"].to_i
     mood = request.cookies["mood"]
     Rack::Response.new do |response|
-      response.set_cookie("text", "You roll the dice: First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}.
- Press Roll to roll your dice again")
+      response.set_cookie("text", "You roll the dice: First dice = #{a = roll},
+ second dice = #{b = roll}: sum = #{your_dices = a + b}. Press Roll to roll your dice again")
       if your_dices > minions_dice
         response.set_cookie("warning_txt", "Minion dices - #{minions_dice}, you dices #{your_dices} - You win!")
         response.set_cookie("minion_txt", "UNDERWEAR…")
