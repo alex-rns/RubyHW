@@ -246,7 +246,6 @@ module Logic
       response.set_cookie("minion_txt", minion_txt)
       response.set_cookie("emoji", emoji)
       response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"] || 30)
-      # response.set_cookie("warning_txt", request.params["slot_machine_value"])
       response.redirect("/slot-machine")
     end
   end
@@ -258,25 +257,73 @@ module Logic
     Rack::Response.new do |response|
       if win_variant[random]
         response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i + win_variant[random])
-        response.set_cookie("mood", request.cookies["mood"] = 100)
+        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i + 10)
         response.set_cookie("text", "#{request.cookies["pet_name"]} win #{win_variant[random]} dollars.")
         response.set_cookie("minion_txt", "BEE DO BEE DO BEE DO!")
-        response.set_cookie("emoji", "&#x1F609;")
+        response.set_cookie("emoji", "&#x1F911;")
       elsif request.cookies["slot_machine_money"].to_i <= 0
-        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i - 40)
+        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i - 50)
         response.set_cookie("text", "#{request.cookies["pet_name"]} lost all the money")
         response.delete_cookie("slot_machine_money")
         response.set_cookie("minion_txt", "SA LA KA!")
-        response.set_cookie("emoji", "&#x1F643;")
+        response.set_cookie("emoji", "&#x2639;")
       else
         response.set_cookie("text", "Minion lost 1 dollar.")
+        response.set_cookie("minion_txt", "BUTTOM!")
+        response.set_cookie("emoji", "&#x1F610;")
         response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i - 1)
-
       end
+      game_mood(request, response)
       response.set_cookie("warning_txt", "Combination: #{random}. Minion balance is #{request.cookies["slot_machine_money"].to_i + win_variant[random].to_i}")
-
       response.redirect("/slot-machine")
     end
+  end
+
+  def self.roll_dice_init(request, emoji, text, minion_txt)
+    Rack::Response.new do |response|
+      response.set_cookie("text", "#{request.cookies["pet_name"]} roll the dice: First dice = #{a = roll}, second dice = #{b = roll}: sum = #{minions_dices = a + b}.
+ Press Roll to roll the dice")
+      response.set_cookie("warning_txt", "Minion dices: #{minions_dices}")
+      response.set_cookie("minions_dices", minions_dices)
+      response.set_cookie("minion_txt", minion_txt)
+      response.set_cookie("emoji", emoji)
+      response.redirect("/roll-dice")
+    end
+  end
+
+  def self.roll_dice_game(request)
+    minions_dice = request.cookies["minions_dices"].to_i
+    mood = request.cookies["mood"]
+    Rack::Response.new do |response|
+      response.set_cookie("text", "You roll the dice: First dice = #{a = roll}, second dice = #{b = roll}: sum = #{your_dices = a + b}.
+ Press Roll to roll your dice again")
+      if your_dices > minions_dice
+        response.set_cookie("warning_txt", "Minion dices - #{minions_dice}, you dices #{your_dices} - You win!")
+        response.set_cookie("minion_txt", "UNDERWEAR…")
+        response.set_cookie("emoji", "&#x1F620;")
+        response.set_cookie("mood", mood = mood.to_i - 10)
+      elsif your_dices == minions_dice
+        response.set_cookie("warning_txt", "Minion dices - #{minions_dice}, you dices #{your_dices} - Draw!")
+        response.set_cookie("emoji", "&#x1F632;")
+      else
+        response.set_cookie("warning_txt", "Minion dices - #{minions_dice}, you dices #{your_dices} - Minion win!")
+        response.set_cookie("minion_txt", "KAMPAI!")
+        response.set_cookie("emoji", "&#x1F973;")
+        response.set_cookie("mood", mood = mood.to_i + 10)
+      end
+      game_mood(request, response)
+      response.redirect("/roll-dice")
+    end
+  end
+
+  def self.game_mood(request, response)
+    if request.cookies["mood"].to_i >= 100
+      response.set_cookie("mood", request.cookies["mood"] = 100)
+    end
+  end
+
+  def self.roll
+    rand(1..6)
   end
 
 

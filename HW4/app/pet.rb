@@ -107,6 +107,12 @@ class Pet
         "Minion has 30 dollars. One game on a slot machine costs 1 dollar. Press START for game",
         "HANA!"
       ) if @request.params["slot"]
+      return Logic.roll_dice_init(
+        @request,
+        "&#x1F60E;",
+        "You roll the dice in turn.",
+        "HANA!"
+      ) if @request.params["roll"]
       return Rack::Response.new(render("index.html.erb")) if @request.params["exit"]
     when "/guess-number"
       Rack::Response.new(render("game-guess-number.html.erb"))
@@ -116,6 +122,10 @@ class Pet
       Rack::Response.new(render("game-slot-machine.html.erb"))
     when "/slot-start"
       return Logic.slot_machine_game(@request) if @request.params["slot_go"]
+    when "/roll-dice"
+      Rack::Response.new(render("game-roll-dice.html.erb"))
+    when "/roll-start"
+      return Logic.roll_dice_game(@request) if @request.params["roll_go"]
     else
       Rack::Response.new("Not Found", 404)
     end
