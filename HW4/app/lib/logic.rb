@@ -143,16 +143,18 @@ module Logic
   end
 
   def self.go_walk(request, emoji, text, minion_txt)
-    if request.cookies["hunger"].to_i >= 70
+    hunger = request.cookies["hunger"]
+    mood = request.cookies["mood"]
+    if hunger.to_i >= 70
       Rack::Response.new do |response|
         response.set_cookie("warning_txt", "Attention! Feed your minion before walk!")
         response.redirect("/start")
       end
     else
       Rack::Response.new do |response|
-        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i + rand(30..50))
+        response.set_cookie("mood", mood = mood.to_i + rand(30..50))
         response.set_cookie("wc", request.cookies["wc"] = -10)
-        response.set_cookie("hunger", request.cookies["hunger"] = request.cookies["hunger"].to_i + rand(10..20))
+        response.set_cookie("hunger", hunger = hunger.to_i + rand(10..20))
         response.set_cookie("text", text)
         response.set_cookie("minion_txt", minion_txt)
         response.set_cookie("emoji", emoji)
@@ -162,25 +164,27 @@ module Logic
   end
 
   def self.clean_up(request, emoji, text, minion_txt)
-    if request.cookies["poo_poo"].to_i.zero?
+    poo_poo = request.cookies["poo_poo"]
+    if poo_poo.to_i.zero?
       Rack::Response.new do |response|
         response.set_cookie("text", "There is nothing to clean up")
         response.redirect("/start")
       end
     else
       Rack::Response.new do |response|
-        response.set_cookie("poo_poo", request.cookies["poo_poo"] = request.cookies["poo_poo"].to_i - 1)
+        response.set_cookie("poo_poo", poo_poo = poo_poo.to_i - 1)
       end
       passed_time(request, emoji, text, minion_txt)
     end
   end
 
   def self.teach(request, emoji, text, minion_txt)
+    study = request.cookies["study"]
     Rack::Response.new do |response|
       if request.cookies["mood"].to_i < 40
-        response.set_cookie("study", request.cookies["study"] = request.cookies["study"].to_i + 1)
+        response.set_cookie("study", study = study.to_i + 1)
       else
-        response.set_cookie("study", request.cookies["study"] = request.cookies["study"].to_i + 2)
+        response.set_cookie("study", study = study.to_i + 2)
       end
     end
     passed_time(request, emoji, text, minion_txt)
@@ -251,18 +255,20 @@ module Logic
   end
 
   def self.slot_machine_game(request)
+    money = request.cookies["slot_machine_money"]
+    mood = request.cookies["mood"]
     win_variant = {"700" => 10, "710" => 20, "720" => 30, "730" => 40, "740" => 50,
                    "750" => 60, "760" => 70, "770" => 80, "777" => 10_000}
     random = rand(700..780).to_s
     Rack::Response.new do |response|
       if win_variant[random]
-        response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i + win_variant[random])
-        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i + 10)
+        response.set_cookie("slot_machine_money", money.to_i + win_variant[random])
+        response.set_cookie("mood", mood = mood.to_i + 10)
         response.set_cookie("text", "#{request.cookies["pet_name"]} win #{win_variant[random]} dollars.")
         response.set_cookie("minion_txt", "BEE DO BEE DO BEE DO!")
         response.set_cookie("emoji", "&#x1F911;")
       elsif request.cookies["slot_machine_money"].to_i <= 0
-        response.set_cookie("mood", request.cookies["mood"] = request.cookies["mood"].to_i - 50)
+        response.set_cookie("mood", mood = mood.to_i - 50)
         response.set_cookie("text", "#{request.cookies["pet_name"]} lost all the money")
         response.delete_cookie("slot_machine_money")
         response.set_cookie("minion_txt", "SA LA KA!")
@@ -271,7 +277,7 @@ module Logic
         response.set_cookie("text", "Minion lost 1 dollar.")
         response.set_cookie("minion_txt", "BUTTOM!")
         response.set_cookie("emoji", "&#x1F610;")
-        response.set_cookie("slot_machine_money", request.cookies["slot_machine_money"].to_i - 1)
+        response.set_cookie("slot_machine_money", money.to_i - 1)
       end
       game_mood(request, response)
       response.set_cookie("warning_txt", "Combination: #{random}.
