@@ -126,7 +126,7 @@ class Pet
     when "/roll-start"
       return Logic.roll_dice_game(@request) if @request.params["roll_go"]
     else
-      Rack::Response.new("Not Found", 404)
+      Rack::Response.new(render("404.html.erb"), 404)
     end
   end
 
